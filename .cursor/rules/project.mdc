@@ -1,0 +1,33 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+React 19 Workshop & Presentation Repo
+
+This repository is a hands-on workshop and presentation kit for “What's New in React 19,” targeting experienced React/TypeScript developers using Next.js 15 (App Router). It's structured as a Next.js 15 project with TypeScript and Shadcn UI, featuring a sidebar for navigation between slides (presentation content) and a series of practical coding tasks.
+
+Key Focus Areas:
+
+* React Server Components (RSC): Stable in React 19, enabling server-side rendering of components for faster loads, smaller bundles, and direct server data access.
+* Client/Server Directives: Usage of 'use client' and 'use server' to clearly separate client and server logic.
+* React Actions (Server Actions): New form/event handling paradigm allowing direct server-side logic from forms, removing the need for custom API routes.
+* New Hooks: useActionState, useFormStatus, and useOptimistic for improved form state, loading, and optimistic UI updates.
+* React Compiler (“React Forget”): Automatic memoization and performance optimization at build time, reducing the need for manual useMemo/useCallback.
+* Other Improvements: Asset preloading APIs, better Web Components support, built-in metadata handling, and simpler ref/context APIs.
+
+Workshop Structure:
+
+* Slides View: Condensed presentation content on React 19’s major features and migration context.
+* Tasks View: Step-by-step coding exercises:
+1. Data fetching with Server Components
+2. Adding interactivity with Client Components
+3. Form submission using Server Actions
+4. Optimistic UI and transition states with new hooks
+5. (Optional) Exploring the React Compiler
+6. 
+The repo is pre-setup for easy onboarding: clone, install, and start coding. Each task is isolated in its own folder, and the sidebar guides attendees through both theory and practice.
+
+In short:
+
+This repo is a Next.js 15-based workshop for React 19, blending a slide-driven presentation with hands-on tasks to teach new features like Server Components, Actions, and the React Compiler, all in a modern, full-stack React context.
