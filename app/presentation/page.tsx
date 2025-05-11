@@ -10,6 +10,7 @@ import {
 import { SidebarInset, SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import Link from "next/link";
 import { CodeBlock } from "@/components/code-block";
+import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 
 const rscExampleCode = `// app/rsc-example/page.tsx (Server Component by default in Next.js App Router)
 async function getGreeting(): Promise<string> {
@@ -342,135 +343,72 @@ export default function MyImageComponent() {
   );
 }`;
 
-const refAsPropCustomInputExampleCode = `// components/MyCustomInput.tsx (React 19 style)
-import React from 'react'; // No forwardRef needed
+const refAsPropCustomInputExampleCode = `// components/SimpleInput.tsx (React 19 style)
+import React from 'react';
 
-// The 'ref' prop is now a standard prop, no special handling like forwardRef needed.
-export function MyCustomInput({ 
-  label, 
-  type = "text", 
-  inputClassName, 
-  ...props 
-}: { 
-  label?: string, 
-  type?: string, 
-  inputClassName?: string 
-} & React.InputHTMLAttributes<HTMLInputElement>, ref: React.Ref<HTMLInputElement>) {
+type SimpleInputProps = React.InputHTMLAttributes<HTMLInputElement> & {
+  ref?: React.Ref<HTMLInputElement>;
+};
+
+// No forwardRef needed!
+export function SimpleInput({ ref, ...props }: SimpleInputProps) {
+  return <input ref={ref} {...props} />;
+}
+
+// Usage example:
+import { useRef } from 'react';
+import { SimpleInput } from './SimpleInput';
+
+function FocusDemo() {
+  const inputRef = useRef<HTMLInputElement>(null);
   return (
-    <div>
-      {label && <label className="block text-sm font-medium mb-1">{label}</label>}
-      <input 
-        type={type} 
-        ref={ref} 
-        className={\`mt-1 block w-full rounded-md border-gray-300 shadow-sm bg-background p-2 \${inputClassName || ''}\`}
-        {...props}
-      />
-    </div>
+    <>
+      <SimpleInput ref={inputRef} placeholder="Type here..." />
+      <button onClick={() => inputRef.current?.focus()}>Focus Input</button>
+    </>
   );
 }
-
-// Parent component using it:
-// import { useRef } from 'react';
-// import { MyCustomInput } from './MyCustomInput';
-// import { Button } from '@/components/ui/button';
-//
-// function UserForm() {
-//   const nameInputRef = useRef<HTMLInputElement>(null);
-//   const focusNameInput = () => nameInputRef.current?.focus();
-//
-//   return (
-//     <form onSubmit={(e) => e.preventDefault()}>
-//       <MyCustomInput label="Your Name:" ref={nameInputRef} name="username" />
-//       <Button type="button" onClick={focusNameInput} className="mt-2">
-//         Focus Name Input
-//       </Button>
-//     </form>
-//   );
-// }
 `;
 
-const useContextThemeExampleCode = `// components/ThemeComponents.tsx
-import { createContext, use } from 'react'; // React.createContext, React.use
+const useContextThemeExampleCode = `// components/ThemeExample.tsx
+import React, { createContext, use } from 'react';
 
-// 1. Create a Context
-const CurrentThemeContext = createContext<string | null>(null);
-// It's good practice to provide a default value that makes sense.
-// Or check for null if no provider is above in the tree.
+const ThemeContext = createContext('light');
 
-// 2. Create a Provider component
-export function ThemeProvider({ children, theme }: { children: React.ReactNode, theme: string }) {
-  return <CurrentThemeContext.Provider value={theme}>{children}</CurrentThemeContext.Provider>;
+export function ThemeProvider({ children, value }: { children: React.ReactNode; value: string }) {
+  return <ThemeContext.Provider value={value}>{children}</ThemeContext.Provider>;
 }
 
-// 3. Consume the context using use(Context)
 export function ThemeDisplay() {
-  // use(Context) can only be called from Server Components or Client Components.
-  // If ThemeDisplay is a Server Component, it works.
-  // If it's a Client Component ('use client'), it also works.
-  const currentTheme = use(CurrentThemeContext);
-
-  if (currentTheme === null) {
-    // This case handles when ThemeDisplay is used without a ThemeProvider ancestor.
-    return <p>No theme provider found.</p>;
-  }
-
-  return <p className="p-2 rounded-md" style={{ background: currentTheme === 'dark' ? '#333' : '#EEE', color: currentTheme === 'dark' ? '#FFF' : '#333'}}>The current theme is: {currentTheme}</p>;
+  const theme = use(ThemeContext);
+  return <div>Theme: {theme}</div>;
 }
 
-// Example Usage:
-// <ThemeProvider theme="dark">
-//   <ThemeDisplay />
-// </ThemeProvider>
-// <ThemeProvider theme="light">
+// Usage:
+// <ThemeProvider value="dark">
 //   <ThemeDisplay />
 // </ThemeProvider>
 `;
 
-const usePromiseUserProfileExampleCode = `// components/UserProfile.tsx
-import { use, Suspense } from 'react'; // React.use, React.Suspense
+const usePromiseUserProfileExampleCode = `// components/SimplePromise.tsx
+import { use, Suspense } from 'react';
 
-// Simulate an API call that returns a Promise
-async function fetchUserData(userId: string): Promise<{ id: string, name: string, email: string }> {
-  console.log(\`Fetching data for user: \${userId}\`);
-  await new Promise(resolve => setTimeout(resolve, 1500)); // Simulate network delay
-  if (userId === '1') {
-    return { id: '1', name: 'Alice Wonderland', email: 'alice@example.com' };
-  } else if (userId === '2') {
-    return { id: '2', name: 'Bob The Builder', email: 'bob@example.com' };
-  }
-  throw new Error('User not found');
+function getMessage() {
+  return new Promise<string>(resolve => setTimeout(() => resolve('Hello from a Promise!'), 1000));
 }
 
-// This component uses use(Promise) and thus must be wrapped in <Suspense>
-function UserDetails({ userId }: { userId: string }) {
-  // fetchUserData returns a Promise. use() will suspend while the promise is pending.
-  // If the promise rejects, use() will throw the error, caught by an ErrorBoundary.
-  const user = use(fetchUserData(userId)); 
+function Message() {
+  const msg = use(getMessage());
+  return <div>{msg}</div>;
+}
 
+export default function SimplePromiseDemo() {
   return (
-    <div className="border p-4 rounded-md bg-card">
-      <h3 className="text-lg font-semibold">{user.name}</h3>
-      <p>ID: {user.id}</p>
-      <p>Email: {user.email}</p>
-    </div>
+    <Suspense fallback={<div>Loading...</div>}>
+      <Message />
+    </Suspense>
   );
 }
-
-// Parent component that provides the Suspense boundary
-export default function UserProfileLoader({ userId }: { userId: string }) {
-  return (
-    <div>
-      <h2 className="text-xl font-bold mb-3">User Profile (via use(Promise))</h2>
-      <Suspense fallback={<p className="text-blue-500 p-4 border rounded-md bg-muted">Loading user details for ID: {userId}...</p>}>
-        <UserDetails userId={userId} />
-      </Suspense>
-    </div>
-  );
-}
-
-// Example Usage:
-// <UserProfileLoader userId="1" />
-// <UserProfileLoader userId="2" />
 `;
 
 const documentMetadataExampleCode = `// For Next.js App Router (Server Component):
@@ -779,26 +717,26 @@ export default function PresentationPage() {
                     <code>useMemo</code>, <code>useCallback</code>, or <code>React.memo</code>. It analyzes components
                     to understand dependencies and prevents unnecessary re-renders.
                   </p>
-                  <h4 className="text-md font-semibold text-foreground mt-3 mb-1">Before (Manual Memoization):</h4>
-                  <div className="my-4">
-                    <CodeBlock
-                      code={compilerOldWayMemoizationExampleCode}
-                      language="tsx"
-                      filename="components/OldWayComponent.tsx"
-                    />
-                  </div>
-                  <h4 className="text-md font-semibold text-foreground mt-3 mb-1">After (React Compiler Optimizes):</h4>
-                  <p>
-                    With the React Compiler enabled, you can often remove manual memoization hooks, and the compiler
-                    will optimize the component automatically.
-                  </p>
-                  <div className="my-4">
-                    <CodeBlock
-                      code={compilerNewWaySimplifiedExampleCode}
-                      language="tsx"
-                      filename="components/NewWayComponent.tsx"
-                    />
-                  </div>
+                  <Tabs defaultValue="manual" className="w-full mt-4">
+                    <TabsList>
+                      <TabsTrigger value="manual">Manual Memoization</TabsTrigger>
+                      <TabsTrigger value="compiler">React Compiler</TabsTrigger>
+                    </TabsList>
+                    <TabsContent value="manual">
+                      <CodeBlock
+                        code={compilerOldWayMemoizationExampleCode}
+                        language="tsx"
+                        filename="components/OldWayComponent.tsx"
+                      />
+                    </TabsContent>
+                    <TabsContent value="compiler">
+                      <CodeBlock
+                        code={compilerNewWaySimplifiedExampleCode}
+                        language="tsx"
+                        filename="components/NewWayComponent.tsx"
+                      />
+                    </TabsContent>
+                  </Tabs>
                 </div>
                 <div className="rounded-lg border p-4 bg-muted/50">
                   <h3 className="text-xl font-semibold text-foreground mb-2">Developer Impact of React 19 Compiler</h3>
@@ -861,7 +799,7 @@ export default function PresentationPage() {
                   <CodeBlock
                     code={refAsPropCustomInputExampleCode}
                     language="tsx"
-                    filename="components/MyCustomInput.tsx"
+                    filename="components/SimpleInput.tsx"
                   />
                 </div>
               </div>
@@ -875,11 +813,7 @@ export default function PresentationPage() {
                   in both Server and Client Components.
                 </p>
                 <div className="my-4">
-                  <CodeBlock
-                    code={useContextThemeExampleCode}
-                    language="tsx"
-                    filename="components/ThemeComponents.tsx"
-                  />
+                  <CodeBlock code={useContextThemeExampleCode} language="tsx" filename="components/ThemeExample.tsx" />
                 </div>
               </div>
               <div>
@@ -895,18 +829,9 @@ export default function PresentationPage() {
                   <CodeBlock
                     code={usePromiseUserProfileExampleCode}
                     language="tsx"
-                    filename="components/UserProfile.tsx"
+                    filename="components/SimplePromise.tsx"
                   />
                 </div>
-              </div>
-              <div>
-                <h3 className="text-xl font-semibold text-foreground">Web Components Support</h3>
-                <p>
-                  Improved integration with Web Components (Custom Elements) in React 19. React now fully supports
-                  passing props and handling events for custom elements, making it easier to use them within a React
-                  application.
-                </p>
-                {/* No code example for brevity, as it's more about interop */}
               </div>
             </div>
           </section>
