@@ -39,6 +39,8 @@ export function CodeBlock({ code, language = "typescript", filename, className }
         <SyntaxHighlighter
           language={language}
           style={oneLight}
+          lineProps={{ style: { wordBreak: "break-all", whiteSpace: "pre-wrap" } }}
+          wrapLines={true}
           customStyle={{
             margin: 0,
             padding: "1.5rem",
