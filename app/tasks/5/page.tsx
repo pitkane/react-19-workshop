@@ -45,12 +45,12 @@ export function ExpensiveComponent({ data }: ExpensiveComponentProps) {
     <div className="space-y-4 border rounded-lg p-6">
       <div className="flex items-center justify-between">
         <h2 className="text-xl font-semibold">Expensive Component</h2>
-        <div className="text-sm text-muted-foreground">Render count: {count}</div>
+        <div className="text-sm">Render count: {count}</div>
       </div>
       
       <div>
         <Button onClick={handleClick}>Increment Counter</Button>
-        <p className="mt-2 text-sm text-muted-foreground">
+        <p className="mt-2 text-sm">
           Click this button to update state. Notice that the expensive calculation doesn't run again.
         </p>
       </div>
@@ -96,7 +96,7 @@ export function ParentComponent() {
       <div className="space-y-4 border rounded-lg p-6">
         <div className="flex items-center justify-between">
           <h2 className="text-xl font-semibold">Parent Component</h2>
-          <div className="text-sm text-muted-foreground">Render count: {parentCount}</div>
+          <div className="text-sm">Render count: {parentCount}</div>
         </div>
         
         <div className="space-y-2">
@@ -108,7 +108,7 @@ export function ParentComponent() {
           </Button>
         </div>
         
-        <p className="text-sm text-muted-foreground">
+        <p className="text-sm">
           The "Update Parent State" button updates state in the parent component, but doesn't affect the child's props.
           <br />
           The "Add Random Number" button changes the data prop passed to the child component.
@@ -127,7 +127,7 @@ export default function CompilerPage() {
     <div className="space-y-6">
       <div>
         <h1 className="text-2xl font-bold mb-2">React Compiler Demo</h1>
-        <p className="text-muted-foreground">
+        <p>
           This demo shows how the React Compiler automatically optimizes components without manual memoization.
           Open your browser's console to see when components render.
         </p>
@@ -137,7 +137,7 @@ export default function CompilerPage() {
       
       <div className="space-y-4 border rounded-lg p-6">
         <h2 className="text-xl font-semibold">How It Works</h2>
-        <div className="space-y-2 text-muted-foreground">
+        <div className="space-y-2">
           <p>
             The React Compiler automatically memoizes components, functions, and calculations at build time.
             In this example:
@@ -187,7 +187,7 @@ export default function Task5Page() {
         <div className="flex flex-1 flex-col gap-8 p-8">
           <div className="space-y-4">
             <h1 className="text-4xl font-bold">Task 5: Exploring the React Compiler</h1>
-            <p className="text-lg text-muted-foreground">
+            <p className="text-lg">
               See how the React Compiler automatically optimizes your components without manual memoization.
             </p>
           </div>
@@ -195,7 +195,7 @@ export default function Task5Page() {
           <div className="space-y-6">
             <div className="space-y-4">
               <h2 className="text-2xl font-semibold">Objective</h2>
-              <p className="text-muted-foreground">
+              <p>
                 Understand how the React 19 Compiler automatically optimizes your components and when to rely on its
                 optimizations.
               </p>
@@ -203,7 +203,7 @@ export default function Task5Page() {
 
             <div className="space-y-4">
               <h2 className="text-2xl font-semibold">Instructions</h2>
-              <div className="space-y-4 text-muted-foreground">
+              <div className="space-y-4">
                 <ol className="list-decimal pl-6 space-y-4">
                   <li>
                     <p>Create a component that would traditionally require manual optimization:</p>
@@ -237,7 +237,7 @@ export default function Task5Page() {
 
             <div className="space-y-4">
               <h2 className="text-2xl font-semibold">Key Concepts</h2>
-              <ul className="list-disc pl-6 space-y-2 text-muted-foreground">
+              <ul className="list-disc pl-6 space-y-2">
                 <li>The React 19 Compiler automatically memoizes components, functions, and calculations.</li>
                 <li>It analyzes your code at build time to determine what needs to be memoized.</li>
                 <li>It reduces the need for manual optimization with useMemo, useCallback, and React.memo.</li>
@@ -251,11 +251,11 @@ export default function Task5Page() {
               <div className="rounded-lg border p-6">
                 <h3 className="text-xl font-semibold mb-4">React Compiler Demo</h3>
                 <div className="space-y-4">
-                  <p className="text-muted-foreground">
+                  <p>
                     This is a placeholder for the React Compiler demo. In a real workshop, you would implement
                     components that demonstrate the compiler's automatic optimizations.
                   </p>
-                  <p className="text-muted-foreground">
+                  <p>
                     Visit{" "}
                     <Link href="/tasks/5/compiler" className="text-primary hover:underline">
                       /tasks/5/compiler

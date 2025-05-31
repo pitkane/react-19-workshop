@@ -57,7 +57,7 @@ export default async function ProductsPage() {
         {products.map(product => (
           <div key={product.id} className="border rounded-lg p-4">
             <h2 className="text-xl font-semibold">{product.name}</h2>
-            <p className="text-muted-foreground">{product.description}</p>
+            <p className="text-neutral-800">{product.description}</p>
             <p className="font-medium mt-2">\${product.price.toFixed(2)}</p>
             <LikeButton />
           </div>
@@ -92,22 +92,18 @@ export default function Task2Page() {
         <div className="flex flex-1 flex-col gap-8 p-8">
           <div className="space-y-4">
             <h1 className="text-4xl font-bold">Task 2: Adding Interactivity with Client Components</h1>
-            <p className="text-lg text-muted-foreground">
-              Integrate a Client Component for interactivity within the RSC structure.
-            </p>
+            <p className="text-lg">Integrate a Client Component for interactivity within the RSC structure.</p>
           </div>
 
           <div className="space-y-6">
             <div className="space-y-4">
               <h2 className="text-2xl font-semibold">Objective</h2>
-              <p className="text-muted-foreground">
-                Create a Client Component that adds interactivity to the server-rendered content from Task 1.
-              </p>
+              <p>Create a Client Component that adds interactivity to the server-rendered content from Task 1.</p>
             </div>
 
             <div className="space-y-4">
               <h2 className="text-2xl font-semibold">Instructions</h2>
-              <div className="space-y-4 text-muted-foreground">
+              <div className="space-y-4">
                 <ol className="list-decimal pl-6 space-y-4">
                   <li>
                     <p>
@@ -139,7 +135,7 @@ export default function Task2Page() {
 
             <div className="space-y-4">
               <h2 className="text-2xl font-semibold">Key Concepts</h2>
-              <ul className="list-disc pl-6 space-y-2 text-muted-foreground">
+              <ul className="list-disc pl-6 space-y-2">
                 <li>The 'use client' directive marks a component as a Client Component.</li>
                 <li>Client Components can use React hooks and browser APIs.</li>
                 <li>Server Components can include Client Components as children.</li>
@@ -153,11 +149,11 @@ export default function Task2Page() {
               <div className="rounded-lg border p-6">
                 <h3 className="text-xl font-semibold mb-4">Client Component Demo</h3>
                 <div className="space-y-4">
-                  <p className="text-muted-foreground">
+                  <p>
                     This is a placeholder for the Client Component demo. In a real workshop, you would implement this
                     feature and see the interactive like button working here.
                   </p>
-                  <p className="text-muted-foreground">
+                  <p>
                     Visit{" "}
                     <Link href="/tasks/2/products" className="text-primary hover:underline">
                       /tasks/2/products

@@ -20,9 +20,7 @@ export default function Page() {
         <div className="flex flex-1 flex-col gap-8 p-8">
           <div className="space-y-4">
             <h1 className="text-4xl font-bold">Welcome to React 19 Workshop</h1>
-            <p className="text-lg text-muted-foreground">
-              Learn about the latest features in React 19 through this interactive workshop.
-            </p>
+            <p className="text-lg">Learn about the latest features in React 19 through this interactive workshop.</p>
           </div>
 
           <div className="grid gap-6 md:grid-cols-2">
@@ -32,7 +30,7 @@ export default function Page() {
             >
               <div className="space-y-2">
                 <h2 className="text-2xl font-semibold tracking-tight">Presentation</h2>
-                <p className="text-muted-foreground">
+                <p>
                   Learn about React 19's new features, including Server Components, Actions, and the React Compiler.
                 </p>
               </div>
@@ -44,16 +42,14 @@ export default function Page() {
             >
               <div className="space-y-2">
                 <h2 className="text-2xl font-semibold tracking-tight">Workshop Tasks</h2>
-                <p className="text-muted-foreground">
-                  Get hands-on experience with React 19's features through practical coding exercises.
-                </p>
+                <p>Get hands-on experience with React 19's features through practical coding exercises.</p>
               </div>
             </Link>
           </div>
 
           <div className="rounded-lg border p-6">
             <h2 className="text-2xl font-semibold tracking-tight mb-4">Workshop Overview</h2>
-            <div className="space-y-4 text-muted-foreground">
+            <div className="space-y-4">
               <p>
                 This workshop is designed to help you understand and implement React 19's new features. The presentation
                 provides an overview of the key concepts, while the tasks give you hands-on experience with implementing

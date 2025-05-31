@@ -35,7 +35,7 @@ export default async function ProductsPage() {
         {products.map(product => (
           <div key={product.id} className="border rounded-lg p-4">
             <h2 className="text-xl font-semibold">{product.name}</h2>
-            <p className="text-muted-foreground">{product.description}</p>
+            <p className="text-neutral-800">{product.description}</p>
             <p className="font-medium mt-2">\${product.price.toFixed(2)}</p>
           </div>
         ))}
@@ -76,15 +76,13 @@ export default function Task1Page() {
         <div className="flex flex-1 flex-col gap-8 p-8">
           <div className="space-y-4">
             <h1 className="text-4xl font-bold">Task 1: Data Fetching with Server Components</h1>
-            <p className="text-lg text-muted-foreground">
-              Leverage React Server Components to fetch and render data on the server.
-            </p>
+            <p className="text-lg">Leverage React Server Components to fetch and render data on the server.</p>
           </div>
 
           <div className="space-y-6">
             <div className="space-y-4">
               <h2 className="text-2xl font-semibold">Objective</h2>
-              <p className="text-muted-foreground">
+              <p>
                 Create a Server Component that fetches data from an API or local data source and renders it on the
                 server.
               </p>
@@ -92,7 +90,7 @@ export default function Task1Page() {
 
             <div className="space-y-4">
               <h2 className="text-2xl font-semibold">Instructions</h2>
-              <div className="space-y-4 text-muted-foreground">
+              <div className="space-y-4">
                 <ol className="list-decimal pl-6 space-y-4">
                   <li>
                     <p>
@@ -122,7 +120,7 @@ export default function Task1Page() {
 
             <div className="space-y-4">
               <h2 className="text-2xl font-semibold">Key Concepts</h2>
-              <ul className="list-disc pl-6 space-y-2 text-muted-foreground">
+              <ul className="list-disc pl-6 space-y-2">
                 <li>React Server Components run exclusively on the server.</li>
                 <li>No useEffect or client-side state is needed for data fetching.</li>
                 <li>Data is fetched before the response is sent to the client.</li>
@@ -136,11 +134,11 @@ export default function Task1Page() {
               <div className="rounded-lg border p-6">
                 <h3 className="text-xl font-semibold mb-4">Server Component Demo</h3>
                 <div className="space-y-4">
-                  <p className="text-muted-foreground">
+                  <p>
                     This is a placeholder for the Server Component demo. In a real workshop, you would implement this
                     feature and see the products rendered here.
                   </p>
-                  <p className="text-muted-foreground">
+                  <p>
                     Visit{" "}
                     <Link href="/tasks/1/products" className="text-primary hover:underline">
                       /tasks/1/products

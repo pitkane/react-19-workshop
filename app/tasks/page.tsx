@@ -32,9 +32,7 @@ export default function TasksPage() {
         <div className="flex flex-1 flex-col gap-8 p-8">
           <div className="space-y-4">
             <h1 className="text-4xl font-bold">Workshop Tasks</h1>
-            <p className="text-lg text-muted-foreground">
-              Complete these hands-on exercises to learn React 19's new features.
-            </p>
+            <p className="text-lg">Complete these hands-on exercises to learn React 19's new features.</p>
           </div>
 
           <div className="grid gap-6 md:grid-cols-2">
@@ -45,9 +43,7 @@ export default function TasksPage() {
                   <CardDescription>Data Fetching with React Server Components</CardDescription>
                 </CardHeader>
                 <CardContent>
-                  <p className="text-muted-foreground">
-                    Learn how to fetch and render data directly on the server using React Server Components.
-                  </p>
+                  <p>Learn how to fetch and render data directly on the server using React Server Components.</p>
                 </CardContent>
               </Card>
             </Link>
@@ -59,9 +55,7 @@ export default function TasksPage() {
                   <CardDescription>Adding Interactivity with Client Components</CardDescription>
                 </CardHeader>
                 <CardContent>
-                  <p className="text-muted-foreground">
-                    Integrate client-side interactivity within the server component structure.
-                  </p>
+                  <p>Integrate client-side interactivity within the server component structure.</p>
                 </CardContent>
               </Card>
             </Link>
@@ -73,9 +67,7 @@ export default function TasksPage() {
                   <CardDescription>Form Submission with Server Actions</CardDescription>
                 </CardHeader>
                 <CardContent>
-                  <p className="text-muted-foreground">
-                    Handle form submissions directly on the server without creating API routes.
-                  </p>
+                  <p>Handle form submissions directly on the server without creating API routes.</p>
                 </CardContent>
               </Card>
             </Link>
@@ -87,9 +79,7 @@ export default function TasksPage() {
                   <CardDescription>Enhancing UX with React 19's New Hooks</CardDescription>
                 </CardHeader>
                 <CardContent>
-                  <p className="text-muted-foreground">
-                    Implement optimistic updates and loading states using React 19's new hooks.
-                  </p>
+                  <p>Implement optimistic updates and loading states using React 19's new hooks.</p>
                 </CardContent>
               </Card>
             </Link>
@@ -101,9 +91,7 @@ export default function TasksPage() {
                   <CardDescription>Exploring Automatic Memoization</CardDescription>
                 </CardHeader>
                 <CardContent>
-                  <p className="text-muted-foreground">
-                    See how the React Compiler automatically optimizes your components without manual memoization.
-                  </p>
+                  <p>See how the React Compiler automatically optimizes your components without manual memoization.</p>
                 </CardContent>
               </Card>
             </Link>
@@ -111,7 +99,7 @@ export default function TasksPage() {
 
           <div className="rounded-lg border p-6">
             <h2 className="text-2xl font-semibold tracking-tight mb-4">Workshop Instructions</h2>
-            <div className="space-y-4 text-muted-foreground">
+            <div className="space-y-4">
               <p>
                 This workshop is structured as a series of tasks in a Next.js 15 application. Each task focuses on a
                 specific feature of React 19. Follow these steps to complete the workshop:

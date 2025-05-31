@@ -116,7 +116,7 @@ export default async function ProductsPage() {
           {products.map(product => (
             <div key={product.id} className="border rounded-lg p-4">
               <h2 className="text-xl font-semibold">{product.name}</h2>
-              <p className="text-muted-foreground">{product.description}</p>
+              <p>{product.description}</p>
               <p className="font-medium mt-2">\${product.price.toFixed(2)}</p>
             </div>
           ))}
@@ -155,7 +155,7 @@ export default function Task3Page() {
         <div className="flex flex-1 flex-col gap-8 p-8">
           <div className="space-y-4">
             <h1 className="text-4xl font-bold">Task 3: Form Submission with Server Actions</h1>
-            <p className="text-lg text-muted-foreground">
+            <p className="text-lg">
               Use React Actions to handle form submissions on the server side, removing the need for an API route.
             </p>
           </div>
@@ -163,14 +163,12 @@ export default function Task3Page() {
           <div className="space-y-6">
             <div className="space-y-4">
               <h2 className="text-2xl font-semibold">Objective</h2>
-              <p className="text-muted-foreground">
-                Implement a form that uses a Server Action to process submissions without creating an API route.
-              </p>
+              <p>Implement a form that uses a Server Action to process submissions without creating an API route.</p>
             </div>
 
             <div className="space-y-4">
               <h2 className="text-2xl font-semibold">Instructions</h2>
-              <div className="space-y-4 text-muted-foreground">
+              <div className="space-y-4">
                 <ol className="list-decimal pl-6 space-y-4">
                   <li>
                     <p>Create a Server Action file to handle form submissions:</p>
@@ -197,7 +195,7 @@ export default function Task3Page() {
 
             <div className="space-y-4">
               <h2 className="text-2xl font-semibold">Key Concepts</h2>
-              <ul className="list-disc pl-6 space-y-2 text-muted-foreground">
+              <ul className="list-disc pl-6 space-y-2">
                 <li>Server Actions run exclusively on the server.</li>
                 <li>They can be called directly from Client Components without creating API routes.</li>
                 <li>They automatically handle form data serialization and validation.</li>
@@ -211,11 +209,11 @@ export default function Task3Page() {
               <div className="rounded-lg border p-6">
                 <h3 className="text-xl font-semibold mb-4">Server Action Demo</h3>
                 <div className="space-y-4">
-                  <p className="text-muted-foreground">
+                  <p>
                     This is a placeholder for the Server Action demo. In a real workshop, you would implement this
                     feature and see the form submission results here.
                   </p>
-                  <p className="text-muted-foreground">
+                  <p>
                     Visit{" "}
                     <Link href="/tasks/3/products" className="text-primary hover:underline">
                       /tasks/3/products

@@ -491,7 +491,7 @@ export default function PresentationPage() {
         <div className="flex flex-1 flex-col gap-8 p-8">
           <section id="introduction" className="space-y-4">
             <h1 className="text-4xl font-bold">What's New in React 19</h1>
-            <div className="space-y-4 text-muted-foreground">
+            <div className="space-y-4">
               <p className="text-lg">
                 Welcome to our React 19 workshop! This session is designed for experienced React & TypeScript developers
                 working with Next.js 15 and the App Router. We'll explore the latest features and improvements in React
@@ -515,7 +515,7 @@ export default function PresentationPage() {
 
           <section id="react18" className="space-y-4">
             <h2 className="text-3xl font-bold">React 19 Recap</h2>
-            <div className="space-y-4 text-muted-foreground">
+            <div className="space-y-4">
               <p>React 19 introduced several groundbreaking features that set the stage for React 19:</p>
               <ul className="list-disc pl-6 space-y-2">
                 <li>Concurrent rendering capabilities</li>
@@ -533,7 +533,7 @@ export default function PresentationPage() {
 
           <section id="rsc" className="space-y-4">
             <h2 className="text-3xl font-bold">React 19's Server Components</h2>
-            <div className="space-y-4 text-muted-foreground">
+            <div className="space-y-4">
               <p>
                 React Server Components (RSC) are now stable in React 19, marking a fundamental change in how React can
                 render content. They allow React to render components on the server and send prepared HTML/UI to the
@@ -571,7 +571,7 @@ export default function PresentationPage() {
 
           <section id="directives" className="space-y-4">
             <h2 className="text-3xl font-bold">React 19's "use client" and "use server" Directives</h2>
-            <div className="space-y-4 text-muted-foreground">
+            <div className="space-y-4">
               <p>
                 With React 19's Server Components, React needed a way to distinguish between client and server code.
                 This led to the introduction of two key directives:
@@ -608,7 +608,7 @@ export default function PresentationPage() {
 
           <section id="actions" className="space-y-4">
             <h2 className="text-3xl font-bold">React 19's Server Actions and Form Handling</h2>
-            <div className="space-y-4 text-muted-foreground">
+            <div className="space-y-4">
               <p>
                 React 19 introduces Actions, a new way to handle user input events that can seamlessly involve
                 server-side logic. They integrate with React's concurrent rendering features for smooth UI updates.
@@ -648,7 +648,7 @@ export default function PresentationPage() {
 
           <section id="hooks" className="space-y-4">
             <h2 className="text-3xl font-bold">React 19's New Hooks for Actions and Transitions</h2>
-            <div className="space-y-4 text-muted-foreground">
+            <div className="space-y-4">
               <p>React 19 introduces three new hooks to complement Actions and improve UX for interactions:</p>
               <div className="space-y-4">
                 <div>
@@ -703,7 +703,7 @@ export default function PresentationPage() {
 
           <section id="compiler" className="space-y-4">
             <h2 className="text-3xl font-bold">The React 19 Compiler</h2>
-            <div className="space-y-4 text-muted-foreground">
+            <div className="space-y-4">
               <p>
                 One of the headline features of React 19 is the new React Compiler (experimental, often referred to as
                 "React Forget"). It's an optimizing compiler that runs at build time to automatically make React code
@@ -754,7 +754,7 @@ export default function PresentationPage() {
 
           <section id="features" className="space-y-4">
             <h2 className="text-3xl font-bold">Other Notable Improvements in React 19</h2>
-            <div className="space-y-6 text-muted-foreground">
+            <div className="space-y-6">
               {" "}
               {/* Changed from ul to div and adjusted spacing */}
               <div>
@@ -838,7 +838,7 @@ export default function PresentationPage() {
 
           <section id="summary" className="space-y-4">
             <h2 className="text-3xl font-bold">Summary and Next Steps</h2>
-            <div className="space-y-4 text-muted-foreground">
+            <div className="space-y-4">
               <p>
                 React 19's major features work together to improve developer experience and app performance. Server
                 Components and Actions simplify data fetching and mutations, new hooks enhance form handling and

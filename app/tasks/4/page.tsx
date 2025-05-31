@@ -180,10 +180,10 @@ export function ProductList({ initialProducts }: ProductListProps) {
                   <Loader2 className="ml-2 h-4 w-4 animate-spin text-muted-foreground" />
                 )}
               </h2>
-              <p className="text-muted-foreground">{product.description}</p>
+              <p>{product.description}</p>
               <p className="font-medium mt-2">\${product.price.toFixed(2)}</p>
               {product._optimistic && (
-                <p className="text-xs text-muted-foreground mt-2 italic">Adding to database...</p>
+                <p className="text-xs mt-2 italic">Adding to database...</p>
               )}
             </div>
           ))}
@@ -235,7 +235,7 @@ export default async function ProductsPage() {
             {products.map(product => (
               <div key={product.id} className="border rounded-lg p-4">
                 <h2 className="text-xl font-semibold">{product.name}</h2>
-                <p className="text-muted-foreground">{product.description}</p>
+                <p>{product.description}</p>
                 <p className="font-medium mt-2">\${product.price.toFixed(2)}</p>
               </div>
             ))}
@@ -278,7 +278,7 @@ export default function Task4Page() {
         <div className="flex flex-1 flex-col gap-8 p-8">
           <div className="space-y-4">
             <h1 className="text-4xl font-bold">Task 4: Optimistic UI and Transition States</h1>
-            <p className="text-lg text-muted-foreground">
+            <p className="text-lg">
               Enhance user experience with optimistic updates and loading states using React 19's new hooks.
             </p>
           </div>
@@ -286,7 +286,7 @@ export default function Task4Page() {
           <div className="space-y-6">
             <div className="space-y-4">
               <h2 className="text-2xl font-semibold">Objective</h2>
-              <p className="text-muted-foreground">
+              <p>
                 Implement optimistic UI updates and loading states to improve the user experience during asynchronous
                 operations.
               </p>
@@ -294,7 +294,7 @@ export default function Task4Page() {
 
             <div className="space-y-4">
               <h2 className="text-2xl font-semibold">Instructions</h2>
-              <div className="space-y-4 text-muted-foreground">
+              <div className="space-y-4">
                 <ol className="list-decimal pl-6 space-y-4">
                   <li>
                     <p>Create a Server Action file similar to Task 3:</p>
@@ -337,7 +337,7 @@ export default function Task4Page() {
 
             <div className="space-y-4">
               <h2 className="text-2xl font-semibold">Key Concepts</h2>
-              <ul className="list-disc pl-6 space-y-2 text-muted-foreground">
+              <ul className="list-disc pl-6 space-y-2">
                 <li>useFormStatus provides the status of the current form submission.</li>
                 <li>useOptimistic allows for immediate UI updates before server operations complete.</li>
                 <li>These hooks work together to create a responsive and user-friendly experience.</li>
@@ -351,11 +351,11 @@ export default function Task4Page() {
               <div className="rounded-lg border p-6">
                 <h3 className="text-xl font-semibold mb-4">Optimistic UI Demo</h3>
                 <div className="space-y-4">
-                  <p className="text-muted-foreground">
+                  <p>
                     This is a placeholder for the Optimistic UI demo. In a real workshop, you would implement these
                     features and see the optimistic updates and loading states in action.
                   </p>
-                  <p className="text-muted-foreground">
+                  <p>
                     Visit{" "}
                     <Link href="/tasks/4/products" className="text-primary hover:underline">
                       /tasks/4/products
