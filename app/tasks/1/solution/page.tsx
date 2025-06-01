@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 
 // Character interface based on the Rick and Morty API
 interface Character {
@@ -104,9 +105,11 @@ export default async function SolutionPage() {
                   key={character.id}
                   className="border rounded-lg p-4 bg-white shadow-sm hover:shadow-md transition-shadow"
                 >
-                  <img
+                  <Image
                     src={character.image}
                     alt={character.name}
+                    width={300}
+                    height={300}
                     className="w-full h-48 object-cover rounded-md mb-3"
                     loading="lazy"
                   />
