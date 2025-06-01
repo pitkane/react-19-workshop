@@ -1,247 +1,161 @@
-import { AppSidebar } from "@/components/app-sidebar";
-import {
-  Breadcrumb,
-  BreadcrumbItem,
-  BreadcrumbLink,
-  BreadcrumbList,
-  BreadcrumbPage,
-  BreadcrumbSeparator,
-} from "@/components/ui/breadcrumb";
-import { SidebarInset, SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
-import { CodeBlock } from "@/components/code-block";
 import Link from "next/link";
-
-const actionsCode = `'use server'
-
-import { Product } from '@/types'
-
-// This would typically be a database or external API
-let products: Product[] = [
-  { id: 1, name: 'Product 1', price: 19.99, description: 'This is product 1' },
-  { id: 2, name: 'Product 2', price: 29.99, description: 'This is product 2' },
-  { id: 3, name: 'Product 3', price: 39.99, description: 'This is product 3' },
-]
-
-export async function addProduct(formData: FormData) {
-  // Simulate server latency
-  await new Promise(resolve => setTimeout(resolve, 1000))
-  
-  const name = formData.get('name') as string
-  const price = parseFloat(formData.get('price') as string)
-  const description = formData.get('description') as string
-  
-  // Validate input
-  if (!name || !price || !description) {
-    return { success: false, message: 'All fields are required' }
-  }
-  
-  // Create new product
-  const newProduct: Product = {
-    id: products.length + 1,
-    name,
-    price,
-    description,
-  }
-  
-  // Add to products array
-  products.push(newProduct)
-  
-  return { success: true, product: newProduct }
-}
-
-export async function getProducts(): Promise<Product[]> {
-  // Simulate server latency
-  await new Promise(resolve => setTimeout(resolve, 500))
-  return [...products]
-}`;
-
-const productFormCode = `'use client'
-
-import { useState } from 'react'
-import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
-import { Label } from '@/components/ui/label'
-import { Textarea } from '@/components/ui/textarea'
-import { addProduct } from '../actions'
-
-export function ProductForm() {
-  const [message, setMessage] = useState<string | null>(null)
-  const [isSuccess, setIsSuccess] = useState<boolean | null>(null)
-  
-  async function handleSubmit(formData: FormData) {
-    const result = await addProduct(formData)
-    setIsSuccess(result.success)
-    setMessage(result.success ? 'Product added successfully!' : result.message)
-  }
-  
-  return (
-    <div className="space-y-4">
-      <h2 className="text-xl font-semibold">Add New Product</h2>
-      <form action={handleSubmit} className="space-y-4">
-        <div className="space-y-2">
-          <Label htmlFor="name">Product Name</Label>
-          <Input id="name" name="name" required />
-        </div>
-        <div className="space-y-2">
-          <Label htmlFor="price">Price</Label>
-          <Input id="price" name="price" type="number" step="0.01" required />
-        </div>
-        <div className="space-y-2">
-          <Label htmlFor="description">Description</Label>
-          <Textarea id="description" name="description" required />
-        </div>
-        <Button type="submit">Add Product</Button>
-      </form>
-      
-      {message && (
-        <div className={isSuccess ? 'text-green-600' : 'text-red-600'}>
-          {message}
-        </div>
-      )}
-    </div>
-  )
-}`;
-
-const productsPageCode = `import { ProductForm } from '../components/product-form'
-import { getProducts } from '../actions'
-
-export default async function ProductsPage() {
-  const products = await getProducts()
-  
-  return (
-    <div className="space-y-8">
-      <div>
-        <h1 className="text-2xl font-bold mb-4">Products</h1>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          {products.map(product => (
-            <div key={product.id} className="border rounded-lg p-4">
-              <h2 className="text-xl font-semibold">{product.name}</h2>
-              <p>{product.description}</p>
-              <p className="font-medium mt-2">\${product.price.toFixed(2)}</p>
-            </div>
-          ))}
-        </div>
-      </div>
-      
-      <div className="border rounded-lg p-6">
-        <ProductForm />
-      </div>
-    </div>
-  )
-}`;
 
 export default function Task3Page() {
   return (
-    <SidebarProvider>
-      <SidebarInset>
-        <header className="flex h-16 shrink-0 items-center gap-2 border-b px-4">
-          <Breadcrumb>
-            <BreadcrumbList>
-              <BreadcrumbItem className="hidden md:block">
-                <BreadcrumbLink href="/">React 19 Workshop</BreadcrumbLink>
-              </BreadcrumbItem>
-              <BreadcrumbSeparator className="hidden md:block" />
-              <BreadcrumbItem className="hidden md:block">
-                <BreadcrumbLink href="/tasks">Workshop Tasks</BreadcrumbLink>
-              </BreadcrumbItem>
-              <BreadcrumbSeparator className="hidden md:block" />
-              <BreadcrumbItem>
-                <BreadcrumbPage>Task 3: Server Actions</BreadcrumbPage>
-              </BreadcrumbItem>
-            </BreadcrumbList>
-          </Breadcrumb>
-          <SidebarTrigger className="-mr-1 ml-auto rotate-180" />
-        </header>
-        <div className="flex flex-1 flex-col gap-8 p-8">
+    <>
+      <div className="space-y-4">
+        <h1 className="text-4xl font-bold">Task 3: Form Submission with Server Actions</h1>
+        <p className="text-lg">
+          Use React Server Actions to handle form submissions without creating API routes, implementing a character
+          rating system.
+        </p>
+      </div>
+
+      <div className="space-y-6">
+        <div className="space-y-4">
+          <h2 className="text-2xl font-semibold">Objective</h2>
+          <p>
+            Create a form that allows users to rate Rick and Morty characters using Server Actions. The form submission
+            will be handled entirely on the server without needing custom API routes.
+          </p>
+        </div>
+
+        <div className="space-y-4">
+          <h2 className="text-2xl font-semibold">Instructions</h2>
           <div className="space-y-4">
-            <h1 className="text-4xl font-bold">Task 3: Form Submission with Server Actions</h1>
-            <p className="text-lg">
-              Use React Actions to handle form submissions on the server side, removing the need for an API route.
-            </p>
+            <ol className="list-decimal pl-6 space-y-4">
+              <li>
+                <p>
+                  Work in the file <code>app/tasks/3/work/page.tsx</code> - the character data fetching is already
+                  implemented for you using the Rick and Morty API.
+                </p>
+              </li>
+              <li>
+                <p>
+                  Create a Server Action function called <code>submitRating</code> using the <code>'use server'</code>{" "}
+                  directive.
+                </p>
+              </li>
+              <li>
+                <p>
+                  The Server Action should accept FormData and extract the character ID, rating (1-5 stars), and
+                  optional comment.
+                </p>
+              </li>
+              <li>
+                <p>
+                  Create a rating form component that uses the Server Action directly in the form's <code>action</code>{" "}
+                  prop.
+                </p>
+              </li>
+              <li>
+                <p>
+                  Display the submitted ratings below each character card, showing the average rating and recent
+                  comments.
+                </p>
+              </li>
+              <li>
+                <p>
+                  Test that form submission works without any client-side JavaScript and updates the UI automatically.
+                </p>
+              </li>
+            </ol>
+          </div>
+        </div>
+
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          <div className="space-y-4">
+            <h2 className="text-2xl font-semibold">Key Concepts</h2>
+            <ul className="list-disc pl-6 space-y-2">
+              <li>Server Actions run exclusively on the server and have access to server-side resources.</li>
+              <li>They can be called directly from forms without creating API routes.</li>
+              <li>Server Actions automatically handle form data serialization.</li>
+              <li>They support progressive enhancement - forms work even without JavaScript.</li>
+              <li>No need for manual fetch calls or API endpoint creation.</li>
+              <li>Automatic revalidation of server components after action completion.</li>
+            </ul>
           </div>
 
-          <div className="space-y-6">
-            <div className="space-y-4">
-              <h2 className="text-2xl font-semibold">Objective</h2>
-              <p>Implement a form that uses a Server Action to process submissions without creating an API route.</p>
-            </div>
-
-            <div className="space-y-4">
-              <h2 className="text-2xl font-semibold">Instructions</h2>
-              <div className="space-y-4">
-                <ol className="list-decimal pl-6 space-y-4">
-                  <li>
-                    <p>Create a Server Action file to handle form submissions:</p>
-                    <CodeBlock code={actionsCode} language="tsx" filename="app/tasks/3/actions.ts" />
-                  </li>
-                  <li>
-                    <p>Create a form component that uses the Server Action:</p>
-                    <CodeBlock
-                      code={productFormCode}
-                      language="tsx"
-                      filename="app/tasks/3/components/product-form.tsx"
-                    />
-                  </li>
-                  <li>
-                    <p>Create a page that displays the products and the form:</p>
-                    <CodeBlock code={productsPageCode} language="tsx" filename="app/tasks/3/products/page.tsx" />
-                  </li>
-                  <li>
-                    <p>Test the form by adding new products and verifying that they appear in the list.</p>
-                  </li>
-                </ol>
-              </div>
-            </div>
-
-            <div className="space-y-4">
-              <h2 className="text-2xl font-semibold">Key Concepts</h2>
-              <ul className="list-disc pl-6 space-y-2">
-                <li>Server Actions run exclusively on the server.</li>
-                <li>They can be called directly from Client Components without creating API routes.</li>
-                <li>They automatically handle form data serialization and validation.</li>
-                <li>They support progressive enhancement for forms that work without JavaScript.</li>
-                <li>Server Actions simplify the code flow by removing the need for explicit fetch calls.</li>
+          <div className="space-y-4">
+            <h2 className="text-2xl font-semibold">Implementation Tips</h2>
+            <div className="rounded-lg border p-4 bg-neutral-50">
+              <ul className="list-disc pl-6 space-y-2 text-sm">
+                <li>
+                  <strong>Server Action:</strong> Use 'use server' at the top of your action function.
+                </li>
+                <li>
+                  <strong>Form Data:</strong> Extract data using <code>formData.get('fieldName')</code>.
+                </li>
+                <li>
+                  <strong>Validation:</strong> Add basic validation in the Server Action.
+                </li>
+                <li>
+                  <strong>Storage:</strong> Use a simple in-memory store or local data structure for ratings.
+                </li>
+                <li>
+                  <strong>Progressive Enhancement:</strong> Form should work without JavaScript enabled.
+                </li>
+                <li>
+                  <strong>Revalidation:</strong> Server components automatically re-render after the action.
+                </li>
               </ul>
-            </div>
-
-            <div className="space-y-4">
-              <h2 className="text-2xl font-semibold">Example Implementation</h2>
-              <div className="rounded-lg border p-6">
-                <h3 className="text-xl font-semibold mb-4">Server Action Demo</h3>
-                <div className="space-y-4">
-                  <p>
-                    This is a placeholder for the Server Action demo. In a real workshop, you would implement this
-                    feature and see the form submission results here.
-                  </p>
-                  <p>
-                    Visit{" "}
-                    <Link href="/tasks/3/products" className="text-primary hover:underline">
-                      /tasks/3/products
-                    </Link>{" "}
-                    after implementing the solution.
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            <div className="flex justify-between pt-6">
-              <Link
-                href="/tasks/2"
-                className="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-10 px-4 py-2"
-              >
-                Previous Task: Client Components
-              </Link>
-              <Link
-                href="/tasks/4"
-                className="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-4 py-2"
-              >
-                Next Task: Optimistic UI
-              </Link>
             </div>
           </div>
         </div>
-      </SidebarInset>
-      <AppSidebar side="right" />
-    </SidebarProvider>
+
+        <div className="space-y-4">
+          <h2 className="text-2xl font-semibold">Workshop Files</h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div className="rounded-lg border p-4">
+              <h3 className="text-lg font-semibold mb-2">Work Area</h3>
+              <p className="text-sm text-neutral-600 mb-3">Implement your Server Action solution</p>
+              <Link
+                href="/tasks/3/work"
+                className="inline-flex items-center justify-center rounded-md text-sm font-medium bg-primary text-primary-foreground hover:bg-primary/90 h-9 px-3"
+              >
+                Open Work File
+              </Link>
+            </div>
+            <div className="rounded-lg border p-4">
+              <h3 className="text-lg font-semibold mb-2">Solution</h3>
+              <p className="text-sm text-neutral-600 mb-3">View the complete solution</p>
+              <Link
+                href="/tasks/3/solution"
+                className="inline-flex items-center justify-center rounded-md text-sm font-medium border border-input bg-background hover:bg-accent hover:text-accent-foreground h-9 px-3"
+              >
+                View Solution
+              </Link>
+            </div>
+            <div className="rounded-lg border p-4">
+              <h3 className="text-lg font-semibold mb-2">API Reference</h3>
+              <p className="text-sm text-neutral-600 mb-3">React Server Actions docs</p>
+              <a
+                href="https://react.dev/reference/rsc/server-actions"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center rounded-md text-sm font-medium border border-input bg-background hover:bg-accent hover:text-accent-foreground h-9 px-3"
+              >
+                React Docs ↗
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div className="flex justify-between pt-6">
+          <Link
+            href="/tasks/2"
+            className="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-10 px-4 py-2"
+          >
+            Previous Task: Client Components
+          </Link>
+          <Link
+            href="/tasks/4"
+            className="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-4 py-2"
+          >
+            Next Task: Optimistic UI
+          </Link>
+        </div>
+      </div>
+    </>
   );
 }
