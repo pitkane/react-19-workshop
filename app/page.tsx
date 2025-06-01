@@ -65,6 +65,76 @@ export default function Page() {
               </ul>
             </div>
           </div>
+
+          <div className="rounded-lg border p-6 bg-blue-50">
+            <h2 className="text-2xl font-semibold tracking-tight mb-4">About Next.js & App Router</h2>
+            <div className="space-y-4">
+              <p>
+                This workshop is built with <strong>Next.js 15</strong> using the App Router, which provides a powerful
+                folder-based routing system. Each folder in the <code>app/</code> directory represents a URL segment,
+                making navigation intuitive and organized.
+              </p>
+              <h3 className="text-lg font-semibold text-foreground">Folder Structure:</h3>
+              <div className="bg-white rounded p-4 border">
+                <table className="w-full text-sm">
+                  <thead>
+                    <tr className="border-b">
+                      <th className="text-left py-2 font-semibold">File Path</th>
+                      <th className="text-left py-2 font-semibold">URL Route</th>
+                    </tr>
+                  </thead>
+                  <tbody className="font-mono">
+                    <tr>
+                      <td className="py-1">
+                        <code>app/page.tsx</code>
+                      </td>
+                      <td className="py-1">
+                        <code>/</code> <span className="text-neutral-600 font-sans">(this page)</span>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td className="py-1">
+                        <code>app/tasks/page.tsx</code>
+                      </td>
+                      <td className="py-1">
+                        <code>/tasks</code>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td className="py-1">
+                        <code>app/tasks/1/page.tsx</code>
+                      </td>
+                      <td className="py-1">
+                        <code>/tasks/1</code>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td className="py-1">
+                        <code>app/tasks/1/work/page.tsx</code>
+                      </td>
+                      <td className="py-1">
+                        <code>/tasks/1/work</code>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td className="py-1">
+                        <code>app/tasks/layout.tsx</code>
+                      </td>
+                      <td className="py-1">
+                        <span className="text-neutral-600 font-sans">
+                          shared layout for all <code>/tasks/*</code> routes
+                        </span>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <p className="text-sm text-neutral-600">
+                This structure enables React 19's Server Components to work seamlessly with Next.js, allowing
+                server-side rendering and client-side interactivity where needed.
+              </p>
+            </div>
+          </div>
         </div>
       </SidebarInset>
       <AppSidebar side="right" />
