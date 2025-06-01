@@ -350,155 +350,150 @@ function CharacterExplorerContent() {
     });
   }, []);
 
-  // Dynamic page title update - React 19 improvement
-  useEffect(() => {
-    if (selectedCharacter) {
-      document.title = `${selectedCharacter.name} - Rick and Morty Character`;
-    } else {
-      document.title = "Character Explorer - React 19 Workshop";
-    }
-
-    // In React 19, you could also use the new metadata APIs for better SEO
-    // This is a simplified example using document.title for compatibility
-  }, [selectedCharacter]);
-
   if (loading) {
     return (
-      <div className="space-y-4 p-8">
-        <h1 className="text-4xl font-bold">Solution: React 19 Improvements</h1>
-        <div className="text-center py-12">
-          <p>Loading characters...</p>
+      <>
+        <div className="space-y-4 p-8">
+          <h1 className="text-4xl font-bold">Solution: React 19 Improvements</h1>
+          <div className="text-center py-12">
+            <p>Loading characters...</p>
+          </div>
         </div>
-      </div>
+      </>
     );
   }
 
   const gridClasses = displayMode === "grid" ? "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4" : "space-y-4";
 
   return (
-    <div className="space-y-6 p-8">
-      <div className="space-y-4">
-        <h1 className="text-4xl font-bold">Solution: React 19 Improvements</h1>
-        <p className="text-lg">Complete implementation with dynamic page titles and the new use() Context hook.</p>
-      </div>
-
-      <div
-        className={`rounded-lg border p-6 ${
-          theme === "light"
-            ? "bg-green-50 border-green-200"
-            : theme === "dark"
-              ? "bg-green-900/20 border-green-500/30"
-              : "bg-green-500/20 border-green-400/30"
-        }`}
-      >
-        <h2 className="text-xl font-semibold mb-3">✅ Implementation Complete</h2>
-        <p className={`text-sm mb-2 ${theme === "light" ? "text-green-700" : "text-green-300"}`}>
-          This solution demonstrates React 19's improvements:
-        </p>
-        <ul className={`list-disc pl-5 text-sm space-y-1 ${theme === "light" ? "text-green-700" : "text-green-300"}`}>
-          <li>Dynamic page titles that update based on selected character</li>
-          <li>Context consumption with the new use() hook instead of useContext</li>
-          <li>Theme system with light, dark, and cosmic modes</li>
-          <li>Simplified Context patterns with better TypeScript support</li>
-          <li>Enhanced component architecture with less boilerplate</li>
-        </ul>
-      </div>
-
-      {/* Theme Controls */}
-      <ThemeControls />
-
-      {/* Character Selection */}
-      <div className="space-y-4">
-        <div className="flex items-center justify-between">
-          <h2 className="text-2xl font-bold">Character Explorer</h2>
-          <div className="text-sm opacity-75">
-            {selectedCharacter ? `Selected: ${selectedCharacter.name}` : "No character selected"}
-          </div>
+    <>
+      <div className="space-y-6 p-8">
+        <div className="space-y-4">
+          <h1 className="text-4xl font-bold">Solution: React 19 Improvements</h1>
+          <p className="text-lg">Complete implementation with the new use() Context hook and theme system.</p>
         </div>
 
-        {/* Character Grid/List */}
-        <div className={gridClasses}>
-          {characters.map((character) => (
-            <ThemedCharacterCard
-              key={character.id}
-              character={character}
-              isSelected={selectedCharacter?.id === character.id}
-              onClick={() => setSelectedCharacter(character)}
-            />
-          ))}
-        </div>
-      </div>
-
-      {/* Selected Character Details */}
-      {selectedCharacter && <CharacterDetails character={selectedCharacter} />}
-
-      <div
-        className={`rounded-lg border p-6 ${
-          theme === "light"
-            ? "bg-blue-50 border-blue-200"
-            : theme === "dark"
-              ? "bg-blue-900/20 border-blue-500/30"
-              : "bg-blue-500/20 border-blue-400/30"
-        }`}
-      >
-        <h2 className="text-xl font-semibold mb-3">🔍 Key Implementation Details</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <div>
-            <h3 className="font-semibold mb-2">React 19 use() Hook:</h3>
-            <ul className="list-disc pl-5 space-y-1 text-sm">
-              <li>Replaced useContext with use(ThemeContext)</li>
-              <li>Simpler syntax and better TypeScript inference</li>
-              <li>Works with Promises and async operations</li>
-              <li>More intuitive error handling</li>
-            </ul>
-          </div>
-          <div>
-            <h3 className="font-semibold mb-2">Dynamic Metadata:</h3>
-            <ul className="list-disc pl-5 space-y-1 text-sm">
-              <li>Page title updates automatically</li>
-              <li>Based on selected character state</li>
-              <li>Better SEO and user experience</li>
-              <li>React 19's enhanced metadata APIs</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-
-      <div
-        className={`rounded-lg border p-6 ${
-          theme === "light"
-            ? "bg-purple-50 border-purple-200"
-            : theme === "dark"
-              ? "bg-purple-900/20 border-purple-500/30"
-              : "bg-purple-500/20 border-purple-400/30"
-        }`}
-      >
-        <h2 className="text-xl font-semibold mb-3">🎯 Try It Out</h2>
-        <p className="text-sm mb-2">Test the React 19 improvements:</p>
-        <ul className="list-disc pl-5 text-sm space-y-1">
-          <li>Click different characters and watch the browser tab title change</li>
-          <li>Switch between light, dark, and cosmic themes</li>
-          <li>Toggle between grid and list display modes</li>
-          <li>Show/hide character details</li>
-          <li>Notice the clean use() hook syntax in the code</li>
-        </ul>
-      </div>
-
-      <div className="flex justify-between pt-6">
-        <Link
-          href="/tasks/4/work"
-          className="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-10 px-4 py-2"
+        <div
+          className={`rounded-lg border p-6 ${
+            theme === "light"
+              ? "bg-green-50 border-green-200"
+              : theme === "dark"
+                ? "bg-green-900/20 border-green-500/30"
+                : "bg-green-500/20 border-green-400/30"
+          }`}
         >
-          Back to Work Area
-        </Link>
-        <Link
-          href="/tasks/5"
-          className="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-4 py-2"
+          <h2 className="text-xl font-semibold mb-3">✅ Implementation Complete</h2>
+          <p className={`text-sm mb-2 ${theme === "light" ? "text-green-700" : "text-green-300"}`}>
+            This solution demonstrates React 19's use() hook improvements:
+          </p>
+          <ul className={`list-disc pl-5 text-sm space-y-1 ${theme === "light" ? "text-green-700" : "text-green-300"}`}>
+            <li>Context consumption with the new use() hook instead of useContext</li>
+            <li>Theme system with light, dark, and cosmic modes</li>
+            <li>Simplified Context patterns with better TypeScript support</li>
+            <li>Enhanced component architecture with less boilerplate</li>
+            <li>Multiple components using use() hook for clean code</li>
+          </ul>
+        </div>
+
+        {/* Theme Controls */}
+        <ThemeControls />
+
+        {/* Character Selection */}
+        <div className="space-y-4">
+          <div className="flex items-center justify-between">
+            <h2 className="text-2xl font-bold">Character Explorer</h2>
+            <div className="text-sm opacity-75">
+              {selectedCharacter ? `Selected: ${selectedCharacter.name}` : "No character selected"}
+            </div>
+          </div>
+
+          {/* Character Grid/List */}
+          <div className={gridClasses}>
+            {characters.map((character) => (
+              <ThemedCharacterCard
+                key={character.id}
+                character={character}
+                isSelected={selectedCharacter?.id === character.id}
+                onClick={() => setSelectedCharacter(character)}
+              />
+            ))}
+          </div>
+        </div>
+
+        {/* Selected Character Details */}
+        {selectedCharacter && <CharacterDetails character={selectedCharacter} />}
+
+        <div
+          className={`rounded-lg border p-6 ${
+            theme === "light"
+              ? "bg-blue-50 border-blue-200"
+              : theme === "dark"
+                ? "bg-blue-900/20 border-blue-500/30"
+                : "bg-blue-500/20 border-blue-400/30"
+          }`}
         >
-          Next Task: React Compiler
-        </Link>
+          <h2 className="text-xl font-semibold mb-3">🔍 Key Implementation Details</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+              <h3 className="font-semibold mb-2">React 19 use() Hook:</h3>
+              <ul className="list-disc pl-5 space-y-1 text-sm">
+                <li>Replaced useContext with use(ThemeContext)</li>
+                <li>Simpler syntax and better TypeScript inference</li>
+                <li>Works with Promises and async operations</li>
+                <li>More intuitive error handling</li>
+                <li>Used across multiple components for consistency</li>
+              </ul>
+            </div>
+            <div>
+              <h3 className="font-semibold mb-2">Context Architecture:</h3>
+              <ul className="list-disc pl-5 space-y-1 text-sm">
+                <li>Comprehensive theme and display settings</li>
+                <li>Theme provider with multiple visual modes</li>
+                <li>Clean separation of UI state management</li>
+                <li>Type-safe context with proper error boundaries</li>
+                <li>Reactive updates across all consuming components</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div
+          className={`rounded-lg border p-6 ${
+            theme === "light"
+              ? "bg-purple-50 border-purple-200"
+              : theme === "dark"
+                ? "bg-purple-900/20 border-purple-500/30"
+                : "bg-purple-500/20 border-purple-400/30"
+          }`}
+        >
+          <h2 className="text-xl font-semibold mb-3">🎯 Try It Out</h2>
+          <p className="text-sm mb-2">Test the React 19 use() hook improvements:</p>
+          <ul className="list-disc pl-5 text-sm space-y-1">
+            <li>Switch between light, dark, and cosmic themes</li>
+            <li>Toggle between grid and list display modes</li>
+            <li>Show/hide character details with the visibility toggle</li>
+            <li>Select different characters to see theme-aware styling</li>
+            <li>Notice the clean use() hook syntax in the code</li>
+            <li>Observe how all components react to Context changes</li>
+          </ul>
+        </div>
+
+        <div className="flex justify-between pt-6">
+          <Link
+            href="/tasks/4/work"
+            className="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-10 px-4 py-2"
+          >
+            Back to Work Area
+          </Link>
+          <Link
+            href="/tasks/5"
+            className="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-4 py-2"
+          >
+            Next Task: React Compiler
+          </Link>
+        </div>
       </div>
-    </div>
+    </>
   );
 }
 

@@ -6,7 +6,7 @@ export default function Task4Page() {
       <div className="space-y-4">
         <h1 className="text-4xl font-bold">Task 4: React 19 Improvements</h1>
         <p className="text-lg">
-          Explore React 19's enhanced metadata handling and the new simplified Context API with the use() hook.
+          Explore React 19's new use() hook for simplified Context consumption and cleaner component architecture.
         </p>
       </div>
 
@@ -14,8 +14,8 @@ export default function Task4Page() {
         <div className="space-y-4">
           <h2 className="text-2xl font-semibold">Objective</h2>
           <p>
-            Learn how React 19 simplifies metadata management with dynamic page titles and how the new use() hook makes
-            working with Context more intuitive and less verbose than useContext.
+            Learn how React 19's new use() hook makes working with Context more intuitive and less verbose than
+            useContext, providing better TypeScript integration and cleaner component code.
           </p>
         </div>
 
@@ -31,14 +31,14 @@ export default function Task4Page() {
               </li>
               <li>
                 <p>
-                  Create a character selection interface that dynamically updates the page title based on the selected
-                  character using React 19's enhanced metadata handling.
+                  Create a character selection interface with a theme/settings Context using React 19's new use() hook
+                  instead of the traditional useContext.
                 </p>
               </li>
               <li>
                 <p>
-                  Implement a theme/settings Context using React 19's new use() hook instead of the traditional
-                  useContext.
+                  Implement a comprehensive theme system with light, dark, and cosmic modes that affects the visual
+                  styling of all components.
                 </p>
               </li>
               <li>
@@ -46,8 +46,8 @@ export default function Task4Page() {
               </li>
               <li>
                 <p>
-                  Test the dynamic page title by selecting different characters and observe how the browser tab title
-                  changes.
+                  Test the theme switching and display mode changes to see how the use() hook simplifies Context
+                  consumption across multiple components.
                 </p>
               </li>
             </ol>
@@ -58,10 +58,10 @@ export default function Task4Page() {
           <div className="space-y-4">
             <h2 className="text-2xl font-semibold">Key Concepts</h2>
             <ul className="list-disc pl-6 space-y-2">
-              <li>Dynamic metadata: Page titles that update based on application state</li>
               <li>use() hook: Simpler Context consumption than useContext</li>
+              <li>Enhanced TypeScript integration and type inference</li>
               <li>Cleaner component architecture with less boilerplate</li>
-              <li>React 19's enhanced metadata APIs for better SEO and UX</li>
+              <li>React 19's improved Context patterns and performance</li>
               <li>Context providers and consumers with modern syntax</li>
               <li>Conditional rendering based on context state</li>
             </ul>
@@ -72,9 +72,6 @@ export default function Task4Page() {
             <div className="rounded-lg border p-4 bg-neutral-50">
               <ul className="list-disc pl-6 space-y-2 text-sm">
                 <li>
-                  <strong>Dynamic Titles:</strong> Use React 19's metadata APIs to update document title.
-                </li>
-                <li>
                   <strong>use() Hook:</strong> Replace useContext(MyContext) with use(MyContext).
                 </li>
                 <li>
@@ -84,7 +81,10 @@ export default function Task4Page() {
                   <strong>Component Hierarchy:</strong> Show how use() simplifies nested component consumption.
                 </li>
                 <li>
-                  <strong>State Updates:</strong> Demonstrate context updates triggering metadata changes.
+                  <strong>State Updates:</strong> Demonstrate context updates affecting all consuming components.
+                </li>
+                <li>
+                  <strong>Theme System:</strong> Implement multiple visual themes with consistent styling.
                 </li>
                 <li>
                   <strong>Error Boundaries:</strong> Handle context not available scenarios gracefully.
@@ -136,21 +136,23 @@ export default function Task4Page() {
           <h2 className="text-xl font-semibold mb-3">🆕 React 19 Improvements</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
-              <h3 className="font-semibold mb-2">Dynamic Metadata:</h3>
-              <ul className="list-disc pl-5 space-y-1 text-sm">
-                <li>Page titles update based on application state</li>
-                <li>Better SEO with dynamic meta descriptions</li>
-                <li>Simpler API for document head management</li>
-                <li>Automatic cleanup of metadata changes</li>
-              </ul>
-            </div>
-            <div>
               <h3 className="font-semibold mb-2">use() Hook Benefits:</h3>
               <ul className="list-disc pl-5 space-y-1 text-sm">
                 <li>Simpler syntax than useContext</li>
                 <li>Works with Promises and other async operations</li>
                 <li>Better TypeScript integration</li>
                 <li>More intuitive API for new developers</li>
+                <li>Enhanced error handling and debugging</li>
+              </ul>
+            </div>
+            <div>
+              <h3 className="font-semibold mb-2">Context Improvements:</h3>
+              <ul className="list-disc pl-5 space-y-1 text-sm">
+                <li>Cleaner component architecture</li>
+                <li>Reduced boilerplate code</li>
+                <li>Better performance optimizations</li>
+                <li>Improved developer experience</li>
+                <li>Enhanced debugging capabilities</li>
               </ul>
             </div>
           </div>
@@ -159,12 +161,12 @@ export default function Task4Page() {
         <div className="rounded-lg border p-6 bg-green-50">
           <h2 className="text-xl font-semibold mb-3">📝 What You'll Learn</h2>
           <ul className="list-disc pl-5 text-sm text-green-700 space-y-1">
-            <li>How to dynamically update page titles based on selected content</li>
+            <li>How to use React 19's new use() hook instead of useContext</li>
             <li>Implementing Context providers with React 19's simplified patterns</li>
-            <li>Using the new use() hook instead of useContext for cleaner code</li>
             <li>Building responsive theme systems with context state</li>
-            <li>Managing application-wide settings with modern React patterns</li>
-            <li>Creating better user experiences with dynamic metadata</li>
+            <li>Creating cleaner component hierarchies with modern React patterns</li>
+            <li>Managing application-wide settings with the new Context API</li>
+            <li>Understanding the benefits of the use() hook over traditional patterns</li>
           </ul>
         </div>
 
