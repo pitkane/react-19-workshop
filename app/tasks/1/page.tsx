@@ -1,65 +1,4 @@
-import { CodeBlock } from "@/components/code-block";
 import Link from "next/link";
-
-const characterPageCode = `import { Character } from '@/types'
-
-async function getCharacters(): Promise<Character[]> {
-  // Fetch characters from Rick and Morty API
-  const response = await fetch('https://rickandmortyapi.com/api/character')
-  
-  if (!response.ok) {
-    throw new Error('Failed to fetch characters')
-  }
-  
-  const data = await response.json()
-  return data.results
-}
-
-export default async function CharactersPage() {
-  const characters = await getCharacters()
-  
-  return (
-    <div className="space-y-6">
-      <h1 className="text-2xl font-bold">Rick and Morty Characters</h1>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-        {characters.map(character => (
-          <div key={character.id} className="border rounded-lg p-4">
-            <img 
-              src={character.image} 
-              alt={character.name}
-              className="w-full h-48 object-cover rounded-md mb-3"
-            />
-            <h2 className="text-xl font-semibold">{character.name}</h2>
-            <p className="text-neutral-600">Status: {character.status}</p>
-            <p className="text-neutral-600">Species: {character.species}</p>
-            <p className="text-neutral-600">Location: {character.location.name}</p>
-          </div>
-        ))}
-      </div>
-    </div>
-  )
-}`;
-
-const characterTypeCode = `export interface Character {
-  id: number
-  name: string
-  status: 'Alive' | 'Dead' | 'unknown'
-  species: string
-  type: string
-  gender: 'Female' | 'Male' | 'Genderless' | 'unknown'
-  origin: {
-    name: string
-    url: string
-  }
-  location: {
-    name: string
-    url: string
-  }
-  image: string
-  episode: string[]
-  url: string
-  created: string
-}`;
 
 export default function Task1Page() {
   return (
@@ -92,28 +31,37 @@ export default function Task1Page() {
               </li>
               <li>
                 <p>
-                  Create a Server Component that fetches character data from the Rick and Morty API. Since it's a Server
-                  Component, you can await directly in the component body:
+                  Import the <code>Character</code> type from <code>@/types</code> - this is already defined for you.
                 </p>
-                <CodeBlock code={characterPageCode} language="tsx" filename="app/tasks/1/work/page.tsx" />
-              </li>
-              <li>
-                <p>Create a types file to define the Character type (from the API documentation):</p>
-                <CodeBlock code={characterTypeCode} language="typescript" filename="types.ts" />
               </li>
               <li>
                 <p>
-                  API Endpoint: <code>https://rickandmortyapi.com/api/character</code> - returns the first 20 characters
-                  with pagination info.
+                  Create an async function called <code>getCharacters()</code> that fetches data from the Rick and Morty
+                  API. The function should return a Promise of Character arrays.
                 </p>
               </li>
               <li>
-                <p>Display each character with their image, name, status, species, and current location.</p>
+                <p>
+                  Use the API endpoint: <code>https://rickandmortyapi.com/api/character</code> - this returns the first
+                  20 characters with pagination info.
+                </p>
+              </li>
+              <li>
+                <p>
+                  In your Server Component, call the <code>getCharacters()</code> function using await (since Server
+                  Components can use async/await directly).
+                </p>
+              </li>
+              <li>
+                <p>
+                  Display each character in a grid layout showing their image, name, status, species, and current
+                  location.
+                </p>
               </li>
               <li>
                 <p>
                   After implementation, verify that the content appears on page load and view the page source to see
-                  that data came with the initial HTML.
+                  that data came with the initial HTML (this proves it's server-rendered).
                 </p>
               </li>
             </ol>
