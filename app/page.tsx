@@ -60,7 +60,7 @@ export default function Page() {
                 <li>React Server Components and their benefits</li>
                 <li>Server Actions for handling form submissions and data mutations</li>
                 <li>Client Components and when to use them</li>
-                <li>Optimistic UI updates and loading states</li>
+                <li>React 19's enhanced metadata handling and simplified Context API</li>
                 <li>The new React Compiler and its optimizations</li>
               </ul>
             </div>

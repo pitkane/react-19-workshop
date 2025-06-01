@@ -88,7 +88,7 @@ const navigation = {
           url: "/tasks/3",
         },
         {
-          title: "Task 4: Optimistic UI",
+          title: "Task 4: React 19 Improvements",
           url: "/tasks/4",
         },
         {

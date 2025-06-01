@@ -49,11 +49,13 @@ export default function TasksPage() {
         <Link href="/tasks/4">
           <Card className="h-full hover:border-foreground/50 transition-colors">
             <CardHeader>
-              <CardTitle>Task 4: Optimistic UI</CardTitle>
-              <CardDescription>Enhancing UX with React 19's New Hooks</CardDescription>
+              <CardTitle>Task 4: React 19 Improvements</CardTitle>
+              <CardDescription>Enhanced Metadata and Context API</CardDescription>
             </CardHeader>
             <CardContent>
-              <p>Implement optimistic updates and loading states using React 19's new hooks.</p>
+              <p>
+                Explore React 19's enhanced metadata handling and the new simplified Context API with the use() hook.
+              </p>
             </CardContent>
           </Card>
         </Link>

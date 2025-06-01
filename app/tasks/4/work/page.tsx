@@ -2,8 +2,8 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { useState, useEffect, createContext } from "react";
-import { Button } from "@/components/ui/button";
+import { useState, useEffect } from "react";
+// import { createContext } from "react"; // Uncomment when implementing context
 import { Character } from "@/types";
 
 // Character fetching function - already implemented for you
@@ -35,6 +35,7 @@ function getStatusColor(status: Character["status"]) {
 
 // TODO: Create a Theme/Settings Context
 // Example context structure you can implement:
+/*
 interface ThemeContextType {
   theme: "light" | "dark" | "cosmic";
   displayMode: "grid" | "list";
@@ -43,9 +44,10 @@ interface ThemeContextType {
   setDisplayMode: (mode: "grid" | "list") => void;
   setShowDetails: (show: boolean) => void;
 }
+*/
 
 // Create the context (implement this)
-const ThemeContext = createContext<ThemeContextType | null>(null);
+// const ThemeContext = createContext<ThemeContextType | null>(null);
 
 // TODO: Create components that use the new use() hook
 // Instead of useContext(ThemeContext), you'll use use(ThemeContext)
