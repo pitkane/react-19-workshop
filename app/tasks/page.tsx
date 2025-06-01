@@ -50,11 +50,11 @@ export default function TasksPage() {
           <Card className="h-full hover:border-foreground/50 transition-colors">
             <CardHeader>
               <CardTitle>Task 4: React 19 Improvements</CardTitle>
-              <CardDescription>Enhanced Metadata and Context API</CardDescription>
+              <CardDescription>new use() Hook and Enhanced Context API</CardDescription>
             </CardHeader>
             <CardContent>
               <p>
-                Explore React 19's enhanced metadata handling and the new simplified Context API with the use() hook.
+                Explore React 19's new use() hook for simplified Context consumption and cleaner component architecture.
               </p>
             </CardContent>
           </Card>
