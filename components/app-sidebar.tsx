@@ -91,10 +91,6 @@ const navigation = {
           title: "Task 4: React 19 Improvements",
           url: "/tasks/4",
         },
-        {
-          title: "Task 5: React Compiler",
-          url: "/tasks/5",
-        },
       ],
     },
   ],

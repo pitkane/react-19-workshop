@@ -59,18 +59,6 @@ export default function TasksPage() {
             </CardContent>
           </Card>
         </Link>
-
-        <Link href="/tasks/5">
-          <Card className="h-full hover:border-foreground/50 transition-colors">
-            <CardHeader>
-              <CardTitle>Task 5: React Compiler</CardTitle>
-              <CardDescription>Exploring Automatic Memoization</CardDescription>
-            </CardHeader>
-            <CardContent>
-              <p>See how the React Compiler automatically optimizes your components without manual memoization.</p>
-            </CardContent>
-          </Card>
-        </Link>
       </div>
 
       <div className="rounded-lg border p-6">

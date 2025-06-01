@@ -4,7 +4,7 @@ import "./globals.css";
 export const metadata: Metadata = {
   title: "React 19 Workshop",
   description:
-    "Interactive workshop exploring React 19's new features including Server Components, Actions, and the React Compiler",
+    "Interactive workshop exploring React 19's new features including Server Components, Actions, and enhanced Context API",
   generator: "Next.js 15",
 };
 

@@ -39,7 +39,7 @@ This repository is a hands-on workshop and presentation kit for "What's New in R
 * **React Actions (Server Actions)**: New form/event handling paradigm allowing direct server-side logic from forms, removing the need for custom API routes.
 * **New Hooks**: useActionState, useFormStatus, and useOptimistic for improved form state, loading, and optimistic UI updates (covered in presentation).
 * **Enhanced use() Hook**: Simplified Context consumption and Promise handling with better conditional usage support.
-* **React Compiler ("React Forget")**: Automatic memoization and performance optimization at build time, reducing the need for manual useMemo/useCallback.
+* **React Compiler**: Automatic memoization and performance optimization at build time, reducing the need for manual useMemo/useCallback.
 * **Other Improvements**: Asset preloading APIs, built-in metadata handling, ref as prop (no forwardRef needed), and simpler Context patterns.
 
 ## 📚 Workshop Structure
@@ -61,8 +61,7 @@ Step-by-step coding exercises with work areas and complete solutions:
 1. **Data fetching with Server Components**: Create async server components that fetch Rick and Morty character data
 2. **Adding interactivity with Client Components**: Build interactive favorite buttons using 'use client' directive
 3. **Form submission using Server Actions**: Implement character rating system without API routes
-4. **React 19's use() Hook**: Explore simplified Context consumption and enhanced patterns (NOT optimistic UI)
-5. **React Compiler exploration**: Experience automatic memoization and performance optimization
+4. **React 19's use() Hook**: Explore simplified Context consumption and enhanced patterns
 
 ## 🗂 Project Architecture
 
@@ -77,7 +76,7 @@ app/
 └── tasks/
     ├── page.tsx               # Tasks overview
     ├── layout.tsx             # Tasks layout with sidebar navigation
-    └── [1-5]/
+    └── [1-4]/
         ├── page.tsx           # Task instructions
         ├── work/page.tsx      # Starting point with TODO comments
         └── solution/page.tsx  # Complete implementation
@@ -110,7 +109,6 @@ The workshop is designed for progressive skill building:
 2. **Interactivity**: Client Components and state management
 3. **Server Logic**: Server Actions and form handling
 4. **Modern Patterns**: Enhanced Context API with use() hook
-5. **Performance**: React Compiler and automatic optimization
 
 Each task builds upon previous concepts while introducing new React 19 features, ensuring practical understanding through hands-on implementation with real-world data and modern development patterns.
 
