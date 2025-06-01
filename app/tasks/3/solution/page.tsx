@@ -1,9 +1,9 @@
 import Link from "next/link";
 import Image from "next/image";
 import { Character } from "@/types";
-import { Button } from "@/components/ui/button";
 import { Star } from "lucide-react";
 import { revalidatePath } from "next/cache";
+import { SubmitButton } from "./_components/submit-button";
 
 // Simple in-memory store for ratings (in a real app, this would be a database)
 const characterRatings: Record<
@@ -46,7 +46,7 @@ async function submitRating(formData: FormData) {
   }
 
   // Simulate network delay for demo purposes
-  await new Promise((resolve) => setTimeout(resolve, 500));
+  await new Promise((resolve) => setTimeout(resolve, 1000));
 
   // Revalidate the current page to show updated ratings immediately
   revalidatePath("/tasks/3/solution");
@@ -98,7 +98,7 @@ function getStatusColor(status: Character["status"]) {
   }
 }
 
-// Rating form component (Server Component)
+// Rating form component (Client Component for loading states)
 interface RatingFormProps {
   characterId: number;
 }
@@ -136,9 +136,7 @@ function RatingForm({ characterId }: RatingFormProps) {
         />
       </div>
 
-      <Button type="submit" size="sm" className="w-full">
-        Submit Rating
-      </Button>
+      <SubmitButton />
     </form>
   );
 }

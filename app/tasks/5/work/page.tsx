@@ -36,6 +36,7 @@ function getStatusColor(status: Character["status"]) {
 // TODO: Create an expensive computation function
 // This function simulates expensive character analysis
 // Without React Compiler, this would need useMemo for optimization
+// NOTE: This function is provided for you to use in your CharacterAnalysis component
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 function analyzeCharacters(characters: Character[]) {
   console.log("🔄 Running expensive character analysis...");
