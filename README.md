@@ -16,7 +16,7 @@ This workshop teaches experienced React/TypeScript developers about:
 
 ### Prerequisites
 
-- Node.js 18+ and pnpm
+- Node.js 18+ and npm
 - Experience with React, TypeScript, and Next.js
 - Basic understanding of server-side rendering concepts
 
@@ -28,10 +28,10 @@ git clone <repository-url>
 cd react-19-workshop
 
 # Install dependencies
-pnpm install
+npm install
 
 # Start the development server
-pnpm dev
+npm run dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) to access the workshop.
@@ -66,19 +66,19 @@ Each task includes:
 
 ```bash
 # Development server with Turbopack
-pnpm dev
+npm run dev
 
 # Build for production
-pnpm build
+npm run build
 
 # Start production server
-pnpm start
+npm start
 
 # Run linting
-pnpm lint
+npm run lint
 
 # Format code
-pnpm format
+npm run format
 ```
 
 ## 📁 Key Files
@@ -132,7 +132,7 @@ types.ts                    # TypeScript definitions
 
 ## 🔧 Troubleshooting
 
-- **Build errors**: Run `pnpm lint` to check for issues
+- **Build errors**: Run `npm run lint` to check for issues
 - **Server errors**: Check the console for detailed error messages
 - **API issues**: Rick & Morty API calls may occasionally fail; refresh to retry
 
