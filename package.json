@@ -1,5 +1,5 @@
 {
-  "name": "my-v0-project",
+  "name": "react-19-workshop",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -26,7 +26,7 @@
     "react-dom": "19.1.0",
     "react-syntax-highlighter": "15.6.1",
     "tailwind-merge": "3.3.0",
-    "zod": "3.25.42"
+    "zod": "3.25.46"
   },
   "devDependencies": {
     "@eslint/eslintrc": "3.3.1",
@@ -42,7 +42,7 @@
     "postcss": "8.5.4",
     "prettier": "^3.5.3",
     "tailwindcss": "4.1.8",
-    "tw-animate-css": "1.3.2",
+    "tw-animate-css": "1.3.3",
     "typescript": "5.8.3"
   },
   "packageManager": "pnpm@10.11.0"
