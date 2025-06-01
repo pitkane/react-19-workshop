@@ -1,389 +1,188 @@
-import { AppSidebar } from "@/components/app-sidebar";
-import {
-  Breadcrumb,
-  BreadcrumbItem,
-  BreadcrumbLink,
-  BreadcrumbList,
-  BreadcrumbPage,
-  BreadcrumbSeparator,
-} from "@/components/ui/breadcrumb";
-import { SidebarInset, SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
-import { CodeBlock } from "@/components/code-block";
 import Link from "next/link";
-
-const actionsCode = `'use server'
-
-import { Product } from '@/types'
-
-// This would typically be a database or external API
-let products: Product[] = [
-  { id: 1, name: 'Product 1', price: 19.99, description: 'This is product 1' },
-  { id: 2, name: 'Product 2', price: 29.99, description: 'This is product 2' },
-  { id: 3, name: 'Product 3', price: 39.99, description: 'This is product 3' },
-]
-
-export async function addProduct(formData: FormData) {
-  // Simulate server latency (longer delay to demonstrate optimistic UI)
-  await new Promise(resolve => setTimeout(resolve, 2000))
-  
-  const name = formData.get('name') as string
-  const price = parseFloat(formData.get('price') as string)
-  const description = formData.get('description') as string
-  
-  // Validate input
-  if (!name || !price || !description) {
-    return { success: false, message: 'All fields are required' }
-  }
-  
-  // Create new product
-  const newProduct: Product = {
-    id: products.length + 1,
-    name,
-    price,
-    description,
-  }
-  
-  // Add to products array
-  products.push(newProduct)
-  
-  return { success: true, product: newProduct }
-}
-
-export async function getProducts(): Promise<Product[]> {
-  // Simulate server latency
-  await new Promise(resolve => setTimeout(resolve, 500))
-  return [...products]
-}`;
-
-const submitButtonCode = `'use client'
-
-import { useFormStatus } from 'react'
-import { Button } from '@/components/ui/button'
-import { Loader2 } from 'lucide-react'
-
-export function SubmitButton() {
-  const { pending } = useFormStatus()
-  
-  return (
-    <Button type="submit" disabled={pending}>
-      {pending ? (
-        <>
-          <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-          Adding...
-        </>
-      ) : (
-        'Add Product'
-      )}
-    </Button>
-  )
-}`;
-
-const productFormCode = `'use client'
-
-import { useState } from 'react'
-import { Input } from '@/components/ui/input'
-import { Label } from '@/components/ui/label'
-import { Textarea } from '@/components/ui/textarea'
-import { SubmitButton } from './submit-button'
-import { addProduct } from '../actions'
-
-export function ProductForm() {
-  const [message, setMessage] = useState<string | null>(null)
-  const [isSuccess, setIsSuccess] = useState<boolean | null>(null)
-  
-  async function handleSubmit(formData: FormData) {
-    const result = await addProduct(formData)
-    setIsSuccess(result.success)
-    setMessage(result.success ? 'Product added successfully!' : result.message)
-  }
-  
-  return (
-    <div className="space-y-4">
-      <h2 className="text-xl font-semibold">Add New Product</h2>
-      <form action={handleSubmit} className="space-y-4">
-        <div className="space-y-2">
-          <Label htmlFor="name">Product Name</Label>
-          <Input id="name" name="name" required />
-        </div>
-        <div className="space-y-2">
-          <Label htmlFor="price">Price</Label>
-          <Input id="price" name="price" type="number" step="0.01" required />
-        </div>
-        <div className="space-y-2">
-          <Label htmlFor="description">Description</Label>
-          <Textarea id="description" name="description" required />
-        </div>
-        <SubmitButton />
-      </form>
-      
-      {message && (
-        <div className={isSuccess ? 'text-green-600' : 'text-red-600'}>
-          {message}
-        </div>
-      )}
-    </div>
-  )
-}`;
-
-const productListCode = `'use client'
-
-import { useOptimistic } from 'react'
-import { Product } from '@/types'
-import { Input } from '@/components/ui/input'
-import { Label } from '@/components/ui/label'
-import { Textarea } from '@/components/ui/textarea'
-import { Button } from '@/components/ui/button'
-import { Loader2 } from 'lucide-react'
-import { addProduct } from '../actions'
-
-interface ProductListProps {
-  initialProducts: Product[]
-}
-
-export function ProductList({ initialProducts }: ProductListProps) {
-  // Set up optimistic state
-  const [optimisticProducts, addOptimisticProduct] = useOptimistic(
-    initialProducts,
-    (state, newProduct: Product) => [...state, { ...newProduct, id: Math.random(), _optimistic: true }]
-  )
-  
-  async function handleSubmit(formData: FormData) {
-    // Create optimistic product
-    const name = formData.get('name') as string
-    const price = parseFloat(formData.get('price') as string)
-    const description = formData.get('description') as string
-    
-    // Add optimistic product to the list
-    addOptimisticProduct({ id: 0, name, price, description })
-    
-    // Submit the form data to the server
-    await addProduct(formData)
-    
-    // Reset the form
-    const form = document.getElementById('product-form') as HTMLFormElement
-    form.reset()
-  }
-  
-  return (
-    <div className="space-y-8">
-      <div>
-        <h1 className="text-2xl font-bold mb-4">Products (Optimistic UI)</h1>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          {optimisticProducts.map(product => (
-            <div 
-              key={product.id} 
-              className={\`border rounded-lg p-4 \${product._optimistic ? 'opacity-70 border-dashed' : ''}\`}
-            >
-              <h2 className="text-xl font-semibold flex items-center">
-                {product.name}
-                {product._optimistic && (
-                  <Loader2 className="ml-2 h-4 w-4 animate-spin text-muted-foreground" />
-                )}
-              </h2>
-              <p>{product.description}</p>
-              <p className="font-medium mt-2">\${product.price.toFixed(2)}</p>
-              {product._optimistic && (
-                <p className="text-xs mt-2 italic">Adding to database...</p>
-              )}
-            </div>
-          ))}
-        </div>
-      </div>
-      
-      <div className="border rounded-lg p-6">
-        <h2 className="text-xl font-semibold mb-4">Add New Product (Optimistic)</h2>
-        <form id="product-form" action={handleSubmit} className="space-y-4">
-          <div className="space-y-2">
-            <Label htmlFor="name">Product Name</Label>
-            <Input id="name" name="name" required />
-          </div>
-          <div className="space-y-2">
-            <Label htmlFor="price">Price</Label>
-            <Input id="price" name="price" type="number" step="0.01" required />
-          </div>
-          <div className="space-y-2">
-            <Label htmlFor="description">Description</Label>
-            <Textarea id="description" name="description" required />
-          </div>
-          <Button type="submit">Add Product (Optimistic)</Button>
-        </form>
-      </div>
-    </div>
-  )
-}`;
-
-const productsPageCode = `import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
-import { ProductForm } from '../components/product-form'
-import { ProductList } from '../components/product-list'
-import { getProducts } from '../actions'
-import { Product } from '@/types'
-
-export default async function ProductsPage() {
-  const products = await getProducts()
-  
-  return (
-    <div className="space-y-6">
-      <h1 className="text-2xl font-bold">Optimistic UI and Loading States</h1>
-      
-      <Tabs defaultValue="loading">
-        <TabsList>
-          <TabsTrigger value="loading">Loading States</TabsTrigger>
-          <TabsTrigger value="optimistic">Optimistic Updates</TabsTrigger>
-        </TabsList>
-        <TabsContent value="loading" className="space-y-6 mt-6">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-            {products.map(product => (
-              <div key={product.id} className="border rounded-lg p-4">
-                <h2 className="text-xl font-semibold">{product.name}</h2>
-                <p>{product.description}</p>
-                <p className="font-medium mt-2">\${product.price.toFixed(2)}</p>
-              </div>
-            ))}
-          </div>
-          
-          <div className="border rounded-lg p-6">
-            <ProductForm />
-          </div>
-        </TabsContent>
-        <TabsContent value="optimistic" className="mt-6">
-          <ProductList initialProducts={products} />
-        </TabsContent>
-      </Tabs>
-    </div>
-  )
-}`;
 
 export default function Task4Page() {
   return (
-    <SidebarProvider>
-      <SidebarInset>
-        <header className="flex h-16 shrink-0 items-center gap-2 border-b px-4">
-          <Breadcrumb>
-            <BreadcrumbList>
-              <BreadcrumbItem className="hidden md:block">
-                <BreadcrumbLink href="/">React 19 Workshop</BreadcrumbLink>
-              </BreadcrumbItem>
-              <BreadcrumbSeparator className="hidden md:block" />
-              <BreadcrumbItem className="hidden md:block">
-                <BreadcrumbLink href="/tasks">Workshop Tasks</BreadcrumbLink>
-              </BreadcrumbItem>
-              <BreadcrumbSeparator className="hidden md:block" />
-              <BreadcrumbItem>
-                <BreadcrumbPage>Task 4: Optimistic UI</BreadcrumbPage>
-              </BreadcrumbItem>
-            </BreadcrumbList>
-          </Breadcrumb>
-          <SidebarTrigger className="-mr-1 ml-auto rotate-180" />
-        </header>
-        <div className="flex flex-1 flex-col gap-8 p-8">
+    <>
+      <div className="space-y-4">
+        <h1 className="text-4xl font-bold">Task 4: React 19 Improvements</h1>
+        <p className="text-lg">
+          Explore React 19's enhanced metadata handling and the new simplified Context API with the use() hook.
+        </p>
+      </div>
+
+      <div className="space-y-6">
+        <div className="space-y-4">
+          <h2 className="text-2xl font-semibold">Objective</h2>
+          <p>
+            Learn how React 19 simplifies metadata management with dynamic page titles and how the new use() hook makes
+            working with Context more intuitive and less verbose than useContext.
+          </p>
+        </div>
+
+        <div className="space-y-4">
+          <h2 className="text-2xl font-semibold">Instructions</h2>
           <div className="space-y-4">
-            <h1 className="text-4xl font-bold">Task 4: Optimistic UI and Transition States</h1>
-            <p className="text-lg">
-              Enhance user experience with optimistic updates and loading states using React 19's new hooks.
-            </p>
+            <ol className="list-decimal pl-6 space-y-4">
+              <li>
+                <p>
+                  Work in the file <code>app/tasks/4/work/page.tsx</code> - character data fetching and basic structure
+                  are already implemented for you.
+                </p>
+              </li>
+              <li>
+                <p>
+                  Create a character selection interface that dynamically updates the page title based on the selected
+                  character using React 19's enhanced metadata handling.
+                </p>
+              </li>
+              <li>
+                <p>
+                  Implement a theme/settings Context using React 19's new use() hook instead of the traditional
+                  useContext.
+                </p>
+              </li>
+              <li>
+                <p>Create nested components that consume the context using the simplified use() API.</p>
+              </li>
+              <li>
+                <p>
+                  Test the dynamic page title by selecting different characters and observe how the browser tab title
+                  changes.
+                </p>
+              </li>
+            </ol>
+          </div>
+        </div>
+
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          <div className="space-y-4">
+            <h2 className="text-2xl font-semibold">Key Concepts</h2>
+            <ul className="list-disc pl-6 space-y-2">
+              <li>Dynamic metadata: Page titles that update based on application state</li>
+              <li>use() hook: Simpler Context consumption than useContext</li>
+              <li>Cleaner component architecture with less boilerplate</li>
+              <li>React 19's enhanced metadata APIs for better SEO and UX</li>
+              <li>Context providers and consumers with modern syntax</li>
+              <li>Conditional rendering based on context state</li>
+            </ul>
           </div>
 
-          <div className="space-y-6">
-            <div className="space-y-4">
-              <h2 className="text-2xl font-semibold">Objective</h2>
-              <p>
-                Implement optimistic UI updates and loading states to improve the user experience during asynchronous
-                operations.
-              </p>
-            </div>
-
-            <div className="space-y-4">
-              <h2 className="text-2xl font-semibold">Instructions</h2>
-              <div className="space-y-4">
-                <ol className="list-decimal pl-6 space-y-4">
-                  <li>
-                    <p>Create a Server Action file similar to Task 3:</p>
-                    <CodeBlock code={actionsCode} language="tsx" filename="app/tasks/4/actions.ts" />
-                  </li>
-                  <li>
-                    <p>Create a form component that uses useFormStatus for loading states:</p>
-                    <CodeBlock
-                      code={submitButtonCode}
-                      language="tsx"
-                      filename="app/tasks/4/components/submit-button.tsx"
-                    />
-                  </li>
-                  <li>
-                    <p>Create a product form component that uses the SubmitButton:</p>
-                    <CodeBlock
-                      code={productFormCode}
-                      language="tsx"
-                      filename="app/tasks/4/components/product-form.tsx"
-                    />
-                  </li>
-                  <li>
-                    <p>Create a product list component with optimistic updates using useOptimistic:</p>
-                    <CodeBlock
-                      code={productListCode}
-                      language="tsx"
-                      filename="app/tasks/4/components/product-list.tsx"
-                    />
-                  </li>
-                  <li>
-                    <p>Create a page that demonstrates both approaches:</p>
-                    <CodeBlock code={productsPageCode} language="tsx" filename="app/tasks/4/products/page.tsx" />
-                  </li>
-                  <li>
-                    <p>Test both approaches and observe the differences in user experience.</p>
-                  </li>
-                </ol>
-              </div>
-            </div>
-
-            <div className="space-y-4">
-              <h2 className="text-2xl font-semibold">Key Concepts</h2>
-              <ul className="list-disc pl-6 space-y-2">
-                <li>useFormStatus provides the status of the current form submission.</li>
-                <li>useOptimistic allows for immediate UI updates before server operations complete.</li>
-                <li>These hooks work together to create a responsive and user-friendly experience.</li>
-                <li>Optimistic updates improve perceived performance by showing changes immediately.</li>
-                <li>Loading states provide feedback during asynchronous operations.</li>
+          <div className="space-y-4">
+            <h2 className="text-2xl font-semibold">Implementation Tips</h2>
+            <div className="rounded-lg border p-4 bg-neutral-50">
+              <ul className="list-disc pl-6 space-y-2 text-sm">
+                <li>
+                  <strong>Dynamic Titles:</strong> Use React 19's metadata APIs to update document title.
+                </li>
+                <li>
+                  <strong>use() Hook:</strong> Replace useContext(MyContext) with use(MyContext).
+                </li>
+                <li>
+                  <strong>Context Structure:</strong> Create theme/settings context with clear state management.
+                </li>
+                <li>
+                  <strong>Component Hierarchy:</strong> Show how use() simplifies nested component consumption.
+                </li>
+                <li>
+                  <strong>State Updates:</strong> Demonstrate context updates triggering metadata changes.
+                </li>
+                <li>
+                  <strong>Error Boundaries:</strong> Handle context not available scenarios gracefully.
+                </li>
               </ul>
-            </div>
-
-            <div className="space-y-4">
-              <h2 className="text-2xl font-semibold">Example Implementation</h2>
-              <div className="rounded-lg border p-6">
-                <h3 className="text-xl font-semibold mb-4">Optimistic UI Demo</h3>
-                <div className="space-y-4">
-                  <p>
-                    This is a placeholder for the Optimistic UI demo. In a real workshop, you would implement these
-                    features and see the optimistic updates and loading states in action.
-                  </p>
-                  <p>
-                    Visit{" "}
-                    <Link href="/tasks/4/products" className="text-primary hover:underline">
-                      /tasks/4/products
-                    </Link>{" "}
-                    after implementing the solution.
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            <div className="flex justify-between pt-6">
-              <Link
-                href="/tasks/3"
-                className="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-10 px-4 py-2"
-              >
-                Previous Task: Server Actions
-              </Link>
-              <Link
-                href="/tasks/5"
-                className="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-4 py-2"
-              >
-                Next Task: React Compiler
-              </Link>
             </div>
           </div>
         </div>
-      </SidebarInset>
-      <AppSidebar side="right" />
-    </SidebarProvider>
+
+        <div className="space-y-4">
+          <h2 className="text-2xl font-semibold">Workshop Files</h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div className="rounded-lg border p-4">
+              <h3 className="text-lg font-semibold mb-2">Work Area</h3>
+              <p className="text-sm text-neutral-600 mb-3">Implement React 19 improvements</p>
+              <Link
+                href="/tasks/4/work"
+                className="inline-flex items-center justify-center rounded-md text-sm font-medium bg-primary text-primary-foreground hover:bg-primary/90 h-9 px-3"
+              >
+                Open Work File
+              </Link>
+            </div>
+            <div className="rounded-lg border p-4">
+              <h3 className="text-lg font-semibold mb-2">Solution</h3>
+              <p className="text-sm text-neutral-600 mb-3">View complete implementation</p>
+              <Link
+                href="/tasks/4/solution"
+                className="inline-flex items-center justify-center rounded-md text-sm font-medium border border-input bg-background hover:bg-accent hover:text-accent-foreground h-9 px-3"
+              >
+                View Solution
+              </Link>
+            </div>
+            <div className="rounded-lg border p-4">
+              <h3 className="text-lg font-semibold mb-2">React 19 Guide</h3>
+              <p className="text-sm text-neutral-600 mb-3">Learn about React 19 features</p>
+              <a
+                href="https://react.dev/blog/2024/04/25/react-19"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center rounded-md text-sm font-medium border border-input bg-background hover:bg-accent hover:text-accent-foreground h-9 px-3"
+              >
+                React 19 Blog ↗
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div className="rounded-lg border p-6 bg-blue-50">
+          <h2 className="text-xl font-semibold mb-3">🆕 React 19 Improvements</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+              <h3 className="font-semibold mb-2">Dynamic Metadata:</h3>
+              <ul className="list-disc pl-5 space-y-1 text-sm">
+                <li>Page titles update based on application state</li>
+                <li>Better SEO with dynamic meta descriptions</li>
+                <li>Simpler API for document head management</li>
+                <li>Automatic cleanup of metadata changes</li>
+              </ul>
+            </div>
+            <div>
+              <h3 className="font-semibold mb-2">use() Hook Benefits:</h3>
+              <ul className="list-disc pl-5 space-y-1 text-sm">
+                <li>Simpler syntax than useContext</li>
+                <li>Works with Promises and other async operations</li>
+                <li>Better TypeScript integration</li>
+                <li>More intuitive API for new developers</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div className="rounded-lg border p-6 bg-green-50">
+          <h2 className="text-xl font-semibold mb-3">📝 What You'll Learn</h2>
+          <ul className="list-disc pl-5 text-sm text-green-700 space-y-1">
+            <li>How to dynamically update page titles based on selected content</li>
+            <li>Implementing Context providers with React 19's simplified patterns</li>
+            <li>Using the new use() hook instead of useContext for cleaner code</li>
+            <li>Building responsive theme systems with context state</li>
+            <li>Managing application-wide settings with modern React patterns</li>
+            <li>Creating better user experiences with dynamic metadata</li>
+          </ul>
+        </div>
+
+        <div className="flex justify-between pt-6">
+          <Link
+            href="/tasks/3"
+            className="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-10 px-4 py-2"
+          >
+            Previous Task: Server Actions
+          </Link>
+          <Link
+            href="/tasks/5"
+            className="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-4 py-2"
+          >
+            Next Task: React Compiler
+          </Link>
+        </div>
+      </div>
+    </>
   );
 }
