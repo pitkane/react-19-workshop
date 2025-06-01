@@ -3,31 +3,121 @@ description:
 globs: 
 alwaysApply: true
 ---
-React 19 Workshop & Presentation Repo
+# React 19 Workshop & Presentation Repo
 
-This repository is a hands-on workshop and presentation kit for “What's New in React 19,” targeting experienced React/TypeScript developers using Next.js 15 (App Router). It's structured as a Next.js 15 project with TypeScript and Shadcn UI, featuring a sidebar for navigation between slides (presentation content) and a series of practical coding tasks.
+This repository is a hands-on workshop and presentation kit for "What's New in React 19," targeting experienced React/TypeScript developers using Next.js 15 (App Router). It's structured as a Next.js 15 project with TypeScript and Shadcn UI, featuring a sidebar for navigation between slides (presentation content) and a series of practical coding tasks.
 
-Key Focus Areas:
+## 🛠 Tech Stack
 
-* React Server Components (RSC): Stable in React 19, enabling server-side rendering of components for faster loads, smaller bundles, and direct server data access.
-* Client/Server Directives: Usage of 'use client' and 'use server' to clearly separate client and server logic.
-* React Actions (Server Actions): New form/event handling paradigm allowing direct server-side logic from forms, removing the need for custom API routes.
-* New Hooks: useActionState, useFormStatus, and useOptimistic for improved form state, loading, and optimistic UI updates.
-* React Compiler (“React Forget”): Automatic memoization and performance optimization at build time, reducing the need for manual useMemo/useCallback.
-* Other Improvements: Asset preloading APIs, better Web Components support, built-in metadata handling, and simpler ref/context APIs.
+**Core Technologies:**
+- **Next.js 15.3.3**: App Router, Server Components, Server Actions with Turbopack dev server
+- **React 19.1.0**: Latest stable release with new features
+- **TypeScript 5.8.3**: Full type safety throughout the project
+- **Tailwind CSS 4.1.8**: Utility-first styling with PostCSS
+- **Node.js 18+**: Runtime environment
 
-Workshop Structure:
+**UI & Components:**
+- **Shadcn UI**: Modern, accessible component library built on Radix UI
+- **Radix UI Primitives**: Dialog, Separator, Slot, Tabs, Tooltip components
+- **Lucide React 0.511.0**: Icon library for UI elements
+- **Class Variance Authority (CVA)**: Type-safe component variants
+- **next-themes 0.4.6**: Dark/light theme support
 
-* Slides View: Condensed presentation content on React 19’s major features and migration context.
-* Tasks View: Step-by-step coding exercises:
-1. Data fetching with Server Components
-2. Adding interactivity with Client Components
-3. Form submission using Server Actions
-4. Optimistic UI and transition states with new hooks
-5. (Optional) Exploring the React Compiler
-6. 
+**Development Tools:**
+- **ESLint 9.28.0**: Code linting with Next.js and React Hooks plugins
+- **Prettier 3.5.3**: Code formatting
+- **React Syntax Highlighter**: Code block highlighting for presentations
+- **Depcheck**: Dependency analysis tool
+
+**External APIs:**
+- **Rick and Morty API**: Real-world data source for practical examples
+
+## 🎯 Key Focus Areas
+
+* **React Server Components (RSC)**: Stable in React 19, enabling server-side rendering of components for faster loads, smaller bundles, and direct server data access.
+* **Client/Server Directives**: Usage of 'use client' and 'use server' to clearly separate client and server logic.
+* **React Actions (Server Actions)**: New form/event handling paradigm allowing direct server-side logic from forms, removing the need for custom API routes.
+* **New Hooks**: useActionState, useFormStatus, and useOptimistic for improved form state, loading, and optimistic UI updates (covered in presentation).
+* **Enhanced use() Hook**: Simplified Context consumption and Promise handling with better conditional usage support.
+* **React Compiler ("React Forget")**: Automatic memoization and performance optimization at build time, reducing the need for manual useMemo/useCallback.
+* **Other Improvements**: Asset preloading APIs, built-in metadata handling, ref as prop (no forwardRef needed), and simpler Context patterns.
+
+## 📚 Workshop Structure
+
+**Presentation (`/presentation`):**
+Comprehensive slide deck covering React 19's major features with interactive code examples:
+1. Introduction and Agenda
+2. React 18 Recap and Context
+3. React Server Components (RSC) Deep Dive
+4. Client/Server Directives ('use client' and 'use server')
+5. Server Actions and Form Handling
+6. New Hooks (useActionState, useFormStatus, useOptimistic)
+7. React Compiler and Automatic Optimization
+8. Other Notable Improvements (Asset Loading, Metadata, Refs, Context, Promises)
+9. Summary and Migration Guide
+
+**Tasks View (`/tasks`):**
+Step-by-step coding exercises with work areas and complete solutions:
+1. **Data fetching with Server Components**: Create async server components that fetch Rick and Morty character data
+2. **Adding interactivity with Client Components**: Build interactive favorite buttons using 'use client' directive
+3. **Form submission using Server Actions**: Implement character rating system without API routes
+4. **React 19's use() Hook**: Explore simplified Context consumption and enhanced patterns (NOT optimistic UI)
+5. **React Compiler exploration**: Experience automatic memoization and performance optimization
+
+## 🗂 Project Architecture
+
+**File Structure:**
+```
+app/
+├── page.tsx                    # Workshop homepage
+├── layout.tsx                  # Root layout with metadata
+├── presentation/
+│   ├── page.tsx               # Presentation main page
+│   └── _components/           # Individual slide sections (01-09)
+└── tasks/
+    ├── page.tsx               # Tasks overview
+    ├── layout.tsx             # Tasks layout with sidebar navigation
+    └── [1-5]/
+        ├── page.tsx           # Task instructions
+        ├── work/page.tsx      # Starting point with TODO comments
+        └── solution/page.tsx  # Complete implementation
+
+components/
+├── app-sidebar.tsx            # Navigation sidebar with tasks/presentation links
+├── dynamic-breadcrumb.tsx     # Context-aware breadcrumbs
+├── code-block.tsx             # Syntax-highlighted code display
+└── ui/                        # Shadcn UI component library
+
+types.ts                       # Shared TypeScript definitions
+```
+
+**Each Task Structure:**
+- **Instructions Page**: Learning objectives, step-by-step guidance, key concepts, and implementation tips
+- **Work Area**: Pre-configured starting point with character data fetching, clear TODO comments, and example code structures
+- **Solution**: Complete implementation with detailed explanations, performance considerations, and best practices
+
+**Common Patterns:**
+- Rick and Morty API integration for consistent, engaging examples
+- Character interface with full TypeScript support
+- Helper functions for styling and data transformation
+- Responsive grid layouts with modern UI components
+- Error handling and loading states
+
+## 🎯 Learning Progression
+
+The workshop is designed for progressive skill building:
+1. **Foundation**: Server Components and data fetching patterns
+2. **Interactivity**: Client Components and state management
+3. **Server Logic**: Server Actions and form handling
+4. **Modern Patterns**: Enhanced Context API with use() hook
+5. **Performance**: React Compiler and automatic optimization
+
+Each task builds upon previous concepts while introducing new React 19 features, ensuring practical understanding through hands-on implementation with real-world data and modern development patterns.
+
 The repo is pre-setup for easy onboarding: clone, install, and start coding. Each task is isolated in its own folder, and the sidebar guides attendees through both theory and practice.
 
-In short:
-
-This repo is a Next.js 15-based workshop for React 19, blending a slide-driven presentation with hands-on tasks to teach new features like Server Components, Actions, and the React Compiler, all in a modern, full-stack React context.
+**Navigation Features:**
+- Unified sidebar for seamless switching between presentation and tasks
+- Dynamic breadcrumbs showing current location
+- Task progression indicators
+- Quick links between work areas and solutions
