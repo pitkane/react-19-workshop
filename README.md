@@ -24,7 +24,7 @@ This workshop teaches experienced React/TypeScript developers about:
 
 ```bash
 # Clone the repository
-git clone <repository-url>
+git clone git@github.com:pitkane/react-19-workshop.git
 cd react-19-workshop
 
 # Install dependencies

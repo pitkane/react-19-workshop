@@ -11,8 +11,8 @@ export default function React18RecapSection() {
           <li>New hooks like useTransition and useDeferredValue</li>
         </ul>
         <p>
-          React 19 also introduced experimental Server Components, but they weren't widely adopted. This sets the stage
-          for why React 19's updates are so important - they make these features stable and production-ready.
+          React 18 also introduced experimental Server Components, but they weren&apos;t widely adopted. This sets the
+          stage for why React 19&apos;s updates are so important - they make these features stable and production-ready.
         </p>
       </div>
     </section>
