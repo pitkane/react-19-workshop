@@ -117,9 +117,13 @@
     @apply border-border outline-ring/50;
   }
   body {
-    @apply bg-background text-foreground text-neutral-800;
+    @apply bg-background text-neutral-800;
   }
   p {
     @apply text-neutral-800;
+  }
+  ::selection {
+    background-color: var(--color-neutral-200);
+    /* color: var(--primary-foreground); */
   }
 }
