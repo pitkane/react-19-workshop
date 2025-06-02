@@ -47,6 +47,77 @@ export default function Page() {
             </Link>
           </div>
 
+          <div className="rounded-lg border p-6 bg-green-50">
+            <h2 className="text-2xl font-semibold tracking-tight mb-4">🚀 Getting Started</h2>
+            <div className="space-y-4">
+              <p>
+                Ready to dive in? You can either use the hosted version or run the workshop locally on your machine.
+              </p>
+
+              <div className="grid gap-4 md:grid-cols-2">
+                <div className="bg-white rounded p-4 border">
+                  <h3 className="text-lg font-semibold text-foreground mb-2">🌐 Use Hosted Version</h3>
+                  <p className="text-sm mb-3">Access the workshop immediately without any setup:</p>
+                  <a
+                    href="https://react-19-workshop.vercel.app/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-blue-600 hover:text-blue-800 underline font-mono text-sm"
+                  >
+                    react-19-workshop.vercel.app
+                  </a>
+                </div>
+
+                <div className="bg-white rounded p-4 border">
+                  <h3 className="text-lg font-semibold text-foreground mb-2">💻 Run Locally</h3>
+                  <p className="text-sm mb-3">Clone and run on your machine for full development experience.</p>
+                  <a
+                    href="https://github.com/pitkane/react-19-workshop"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-blue-600 hover:text-blue-800 underline font-mono text-sm"
+                  >
+                    github.com/pitkane/react-19-workshop
+                  </a>
+                </div>
+              </div>
+
+              <div className="bg-white rounded p-4 border">
+                <h3 className="text-lg font-semibold text-foreground mb-3">Local Setup Instructions</h3>
+
+                <div className="space-y-3">
+                  <div>
+                    <h4 className="font-medium mb-2">Prerequisites:</h4>
+                    <ul className="list-disc pl-6 space-y-1 text-sm">
+                      <li>Node.js 18+ and npm</li>
+                      <li>Experience with React, TypeScript, and Next.js</li>
+                      <li>Basic understanding of server-side rendering concepts</li>
+                    </ul>
+                  </div>
+
+                  <div>
+                    <h4 className="font-medium mb-2">Installation:</h4>
+                    <div className="bg-gray-50 rounded p-3 font-mono text-sm space-y-1">
+                      <div># Clone the repository</div>
+                      <div>git clone git@github.com:pitkane/react-19-workshop.git</div>
+                      <div>cd react-19-workshop</div>
+                      <div></div>
+                      <div># Install dependencies</div>
+                      <div>npm install</div>
+                      <div></div>
+                      <div># Start the development server</div>
+                      <div>npm run dev</div>
+                    </div>
+                    <p className="text-sm mt-2 text-neutral-600">
+                      Open <code className="bg-gray-100 px-1 rounded">http://localhost:3000</code> to access the
+                      workshop.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
           <div className="rounded-lg border p-6">
             <h2 className="text-2xl font-semibold tracking-tight mb-4">Workshop Overview</h2>
             <div className="space-y-4">
