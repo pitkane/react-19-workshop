@@ -397,6 +397,53 @@ export default function SimplePromiseDemo() {
 }
 `;
 
+export const usePromiseConditionalExampleCode = `// components/ConditionalPromise.tsx
+'use client';
+
+import { use, Suspense, useState } from 'react';
+import { Button } from '@/components/ui/button';
+
+function fetchUserData() {
+  return new Promise<{ name: string; email: string }>(resolve => 
+    setTimeout(() => resolve({ 
+      name: 'John Doe', 
+      email: 'john@example.com' 
+    }), 800)
+  );
+}
+
+function UserProfile({ shouldShowProfile }: { shouldShowProfile: boolean }) {
+  // ✅ use() can be called conditionally - unlike useContext!
+  if (shouldShowProfile) {
+    const userData = use(fetchUserData());
+    return (
+      <div className="p-4 border rounded">
+        <h3>User Profile</h3>
+        <p>Name: {userData.name}</p>
+        <p>Email: {userData.email}</p>
+      </div>
+    );
+  }
+  
+  return <p>Profile hidden</p>;
+}
+
+export default function ConditionalPromiseDemo() {
+  const [show, setShow] = useState(false);
+  
+  return (
+    <div className="space-y-4">
+      <Button onClick={() => setShow(!show)}>
+        {show ? 'Hide' : 'Show'} Profile
+      </Button>
+      <Suspense fallback={<div>Loading user data...</div>}>
+        <UserProfile shouldShowProfile={show} />
+      </Suspense>
+    </div>
+  );
+}
+`;
+
 export const documentMetadataExampleCode = `// For Next.js App Router (Server Component):
 // app/my-dynamic-page/page.tsx
 export async function generateMetadata({ params }: { params: { id: string } }) {

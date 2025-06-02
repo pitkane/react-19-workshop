@@ -8,6 +8,7 @@ import {
   refAsPropCustomInputExampleCode,
   useContextThemeExampleCode,
   usePromiseUserProfileExampleCode,
+  usePromiseConditionalExampleCode,
 } from "./code-examples";
 
 export default function FeaturesSection() {
@@ -98,9 +99,27 @@ export default function FeaturesSection() {
             allowing components to suspend rendering while data is being fetched. This is particularly useful in Server
             Components for data fetching or in Client Components within a Suspense boundary.
           </p>
-          <div className="my-4">
-            <CodeBlock code={usePromiseUserProfileExampleCode} language="tsx" filename="components/SimplePromise.tsx" />
-          </div>
+
+          <Tabs defaultValue="basic" className="w-full mt-4">
+            <TabsList className="grid w-full grid-cols-2">
+              <TabsTrigger value="basic">Basic Usage</TabsTrigger>
+              <TabsTrigger value="conditional">Conditional Usage</TabsTrigger>
+            </TabsList>
+            <TabsContent value="basic">
+              <CodeBlock
+                code={usePromiseUserProfileExampleCode}
+                language="tsx"
+                filename="components/SimplePromise.tsx"
+              />
+            </TabsContent>
+            <TabsContent value="conditional">
+              <CodeBlock
+                code={usePromiseConditionalExampleCode}
+                language="tsx"
+                filename="components/ConditionalPromise.tsx"
+              />
+            </TabsContent>
+          </Tabs>
         </div>
       </div>
     </section>
