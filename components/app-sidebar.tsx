@@ -38,7 +38,7 @@ const navigation = {
           url: "/presentation#introduction",
         },
         {
-          title: "React 19 Recap",
+          title: "React 18 Recap",
           url: "/presentation#react18",
         },
         {
