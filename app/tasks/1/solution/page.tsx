@@ -1,38 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-
-// Character interface based on the Rick and Morty API
-interface Character {
-  id: number;
-  name: string;
-  status: "Alive" | "Dead" | "unknown";
-  species: string;
-  type: string;
-  gender: "Female" | "Male" | "Genderless" | "unknown";
-  origin: {
-    name: string;
-    url: string;
-  };
-  location: {
-    name: string;
-    url: string;
-  };
-  image: string;
-  episode: string[];
-  url: string;
-  created: string;
-}
-
-// API response interface
-interface ApiResponse {
-  info: {
-    count: number;
-    pages: number;
-    next: string | null;
-    prev: string | null;
-  };
-  results: Character[];
-}
+import { ApiResponse, Character } from "@/types";
 
 // Fetch characters from the Rick and Morty API
 async function getCharacters(): Promise<Character[]> {
