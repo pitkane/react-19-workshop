@@ -16,7 +16,7 @@ This workshop teaches experienced React/TypeScript developers about:
 ### Prerequisites
 
 - Node.js 18+ and npm
-- Experience with React, TypeScript, and Next.js
+- Experience with React, TypeScript. Next.js experience helps.
 - Basic understanding of server-side rendering concepts
 
 ### Installation

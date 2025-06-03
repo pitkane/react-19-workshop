@@ -90,7 +90,7 @@ export default function Page() {
                     <h4 className="font-medium mb-2">Prerequisites:</h4>
                     <ul className="list-disc pl-6 space-y-1 text-sm">
                       <li>Node.js 18+ and npm</li>
-                      <li>Experience with React, TypeScript, and Next.js</li>
+                      <li>Experience with React, TypeScript. Next.js experience helps.</li>
                       <li>Basic understanding of server-side rendering concepts</li>
                     </ul>
                   </div>
