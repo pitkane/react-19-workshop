@@ -123,7 +123,7 @@ types.ts                    # TypeScript definitions
 ## 📖 Learning Path
 
 1. Start with the **Presentation** to understand React 19 concepts
-2. Work through **Tasks 1-5** in order
+2. Work through **Tasks 1-4** in order
 3. Begin each task in the **Work Area**
 4. Reference the **Solution** when needed
 5. Use the sidebar to navigate between tasks and presentation
