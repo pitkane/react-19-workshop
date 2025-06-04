@@ -24,7 +24,6 @@ const routeLabels: Record<string, string> = {
   "/tasks/2": "Task 2: Client Components",
   "/tasks/3": "Task 3: Server Actions",
   "/tasks/4": "Task 4: React 19 Improvements",
-  "/tasks/5": "Task 5: React Compiler",
   "/tasks/1/work": "Work Area",
   "/tasks/1/solution": "Solution",
   "/tasks/2/work": "Work Area",
@@ -33,8 +32,6 @@ const routeLabels: Record<string, string> = {
   "/tasks/3/solution": "Solution",
   "/tasks/4/work": "Work Area",
   "/tasks/4/solution": "Solution",
-  "/tasks/5/work": "Work Area",
-  "/tasks/5/solution": "Solution",
   "/presentation": "Presentation",
   "/dashboard": "Dashboard",
 };
