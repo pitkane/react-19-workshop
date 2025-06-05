@@ -206,6 +206,15 @@ export default function Page() {
               </p>
             </div>
           </div>
+
+          <div className="rounded-lg border p-6 bg-gray-50">
+            <h2 className="text-2xl font-semibold tracking-tight mb-4">Author</h2>
+            <p className="text-lg font-semibold">Mikko Kohtala</p>
+            <p className="text-sm text-neutral-700">Software developer for Knowit</p>
+            <p className="text-sm text-neutral-700 mt-2">
+              This workshop was created as part of Knowit Javascript Guild.
+            </p>
+          </div>
         </div>
       </SidebarInset>
       <AppSidebar side="right" />
