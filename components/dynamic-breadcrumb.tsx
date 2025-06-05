@@ -39,7 +39,7 @@ const routeLabels: Record<string, string> = {
   "/dashboard": "Dashboard",
 };
 
-function generateBreadcrumbs(pathname: string): BreadcrumbSegment[] {
+export function generateBreadcrumbs(pathname: string): BreadcrumbSegment[] {
   const segments = pathname.split("/").filter(Boolean);
   const breadcrumbs: BreadcrumbSegment[] = [];
 
